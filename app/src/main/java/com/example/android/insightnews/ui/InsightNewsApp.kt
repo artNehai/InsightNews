@@ -15,6 +15,7 @@ import com.example.android.insightnews.ui.screens.ExploreScreen
 fun InsightNewsApp() {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
+        bottomBar = { BottomNavBar() },
         contentWindowInsets = WindowInsets(
             left = dimensionResource(R.dimen.screen_margin),
             right = dimensionResource(R.dimen.screen_margin),
