@@ -6,6 +6,10 @@
     <dimen name="medium_content_padding">8dp</dimen>
     <dimen name="large_content_padding">16dp</dimen>
 
+    <dimen name="medium_content_spacer">8dp</dimen>
+
+    <dimen name="editor_choice_card_width">200dp</dimen>
+    <dimen name="editor_choice_card_height">235dp</dimen>
     <dimen name="small_icon_size">16dp</dimen>
     <dimen name="bottom_nav_icon_size">24dp</dimen>
 </resources>
