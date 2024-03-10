@@ -1,4 +1,4 @@
-package com.example.android.insightnews.ui.components
+package com.example.android.insightnews.ui
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

@@ -30,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.android.insightnews.R
+import com.example.android.insightnews.ui.components.ArticleCard
 import com.example.android.insightnews.ui.theme.InsightNewsTheme
 
 @Composable
@@ -54,20 +55,20 @@ fun ExploreScreen(
                     style = MaterialTheme.typography.headlineSmall,
                 )
 
-                Spacer(Modifier.height(dimensionResource(R.dimen.medium_content_spacer)))
+                Spacer(Modifier.height(dimensionResource(R.dimen.small_content_spacer)))
 
                 LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.large_content_spacer)),
+                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.medium_content_spacer)),
                 ) {
                     items(5) {
                         EditorChoiceCard()
                     }
                 }
 
-                Spacer(Modifier.height(dimensionResource(R.dimen.extra_large_content_spacer)))
+                Spacer(Modifier.height(dimensionResource(R.dimen.large_content_spacer)))
 
                 LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.large_content_spacer)),
+                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.medium_content_spacer)),
                 ) {
                     items(10) {
                         Text(
@@ -77,6 +78,10 @@ fun ExploreScreen(
                     }
                 }
             }
+        }
+
+        items(5) {
+            ArticleCard()
         }
     }
 }
@@ -131,7 +136,7 @@ fun EditorChoiceCard(
                 contentScale = ContentScale.FillWidth,
             )
 
-            Spacer(Modifier.height(dimensionResource(R.dimen.medium_content_spacer)))
+            Spacer(Modifier.height(dimensionResource(R.dimen.small_content_spacer)))
 
             Text(
                 text = EditorCardPlaceholder.title,
@@ -153,7 +158,7 @@ fun EditorChoiceCard(
                     contentScale = ContentScale.Crop,
                 )
 
-                Spacer(Modifier.width(dimensionResource(R.dimen.medium_content_spacer)))
+                Spacer(Modifier.width(dimensionResource(R.dimen.small_content_spacer)))
 
                 Text(
                     text = EditorCardPlaceholder.resourceName,
@@ -183,9 +188,7 @@ object EditorCardPlaceholder {
     val timeToRead = "6 min read"
 }
 
-@Preview(
-    showBackground = true,
-)
+@Preview(showBackground = true)
 @Composable
 private fun ExploreScreenPreview() {
     InsightNewsTheme {
