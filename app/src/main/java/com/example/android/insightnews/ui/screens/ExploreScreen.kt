@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -81,7 +82,12 @@ fun ExploreScreen(
         }
 
         items(5) {
-            ArticleCard()
+            ArticleCard(
+                modifier = Modifier.padding(vertical = dimensionResource(R.dimen.medium_content_spacer))
+            )
+            if (it < 4) {
+                HorizontalDivider()
+            }
         }
     }
 }
@@ -163,6 +169,7 @@ fun EditorChoiceCard(
                 Text(
                     text = EditorCardPlaceholder.resourceName,
                     color = MaterialTheme.colorScheme.onSecondaryContainer,
+                    maxLines = 1,
                     style = MaterialTheme.typography.labelMedium,
                 )
             }
