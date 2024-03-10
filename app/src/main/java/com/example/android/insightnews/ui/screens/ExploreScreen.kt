@@ -63,6 +63,19 @@ fun ExploreScreen(
                         EditorChoiceCard()
                     }
                 }
+
+                Spacer(Modifier.height(dimensionResource(R.dimen.extra_large_content_spacer)))
+
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.large_content_spacer)),
+                ) {
+                    items(10) {
+                        Text(
+                            text = "Topic ${it + 1}",
+                            style = MaterialTheme.typography.headlineSmall,
+                        )
+                    }
+                }
             }
         }
     }
