@@ -7,6 +7,7 @@
     <dimen name="large_content_padding">16dp</dimen>
 
     <dimen name="medium_content_spacer">8dp</dimen>
+    <dimen name="large_content_spacer">16dp</dimen>
 
     <dimen name="editor_choice_card_width">200dp</dimen>
     <dimen name="editor_choice_card_height">235dp</dimen>

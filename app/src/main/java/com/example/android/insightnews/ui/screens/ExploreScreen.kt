@@ -2,6 +2,7 @@ package com.example.android.insightnews.ui.screens
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -54,7 +56,13 @@ fun ExploreScreen(
 
                 Spacer(Modifier.height(dimensionResource(R.dimen.medium_content_spacer)))
 
-                EditorChoiceCard()
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.large_content_spacer)),
+                ) {
+                    items(5) {
+                        EditorChoiceCard()
+                    }
+                }
             }
         }
     }
