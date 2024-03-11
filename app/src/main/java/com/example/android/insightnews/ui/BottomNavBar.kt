@@ -36,7 +36,7 @@ fun BottomNavBar(
                         Icon(
                             painter = painterResource(navItem.icon),
                             contentDescription = null,
-                            modifier = Modifier.size(dimensionResource(R.dimen.bottom_nav_icon_size))
+                            modifier = Modifier.size(dimensionResource(R.dimen.large_icon_size))
                         )
                     },
                     label = { Text(stringResource(navItem.label)) }

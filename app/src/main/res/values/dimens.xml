@@ -6,6 +6,7 @@
     <dimen name="small_content_padding">4dp</dimen>
     <dimen name="medium_content_padding">8dp</dimen>
     <dimen name="large_content_padding">16dp</dimen>
+    <dimen name="extra_large_content_padding">24dp</dimen>
 
     <dimen name="extra_small_content_spacer">4dp</dimen>
     <dimen name="small_content_spacer">8dp</dimen>
@@ -19,5 +20,5 @@
 
     <dimen name="small_icon_size">16dp</dimen>
     <dimen name="medium_icon_size">20dp</dimen>
-    <dimen name="bottom_nav_icon_size">24dp</dimen>
+    <dimen name="large_icon_size">24dp</dimen>
 </resources>
