@@ -48,19 +48,19 @@ fun BottomNavBar(
 
 val BottomNavItems = listOf(
     NavigationItem(
-        icon = R.drawable.grid_nav_icon,
+        icon = R.drawable.grid_icon,
         label = R.string.feed_nav_label,
     ),
     NavigationItem(
-        icon = R.drawable.explore_nav_icon,
+        icon = R.drawable.explore_icon,
         label = R.string.explore_nav_label,
     ),
     NavigationItem(
-        icon = R.drawable.saved_nav_icon,
+        icon = R.drawable.save_icon_outline,
         label = R.string.saved_nav_label,
     ),
     NavigationItem(
-        icon = R.drawable.user_nav_icon,
+        icon = R.drawable.user_icon,
         label = R.string.profile_nav_label,
     ),
 )

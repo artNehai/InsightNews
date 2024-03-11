@@ -3,6 +3,7 @@ package com.example.android.insightnews.ui.screens
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,10 +19,16 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -132,53 +139,77 @@ fun EditorChoiceCard(
             .width(dimensionResource(R.dimen.editor_choice_card_width))
             .height(dimensionResource(R.dimen.editor_choice_card_height)),
     ) {
-        Column(
-            modifier = Modifier.padding(dimensionResource(R.dimen.medium_content_padding)),
+        Box(
+            modifier = Modifier
+                .padding(dimensionResource(R.dimen.medium_content_padding))
         ) {
-            Image(
-                painter = painterResource(EditorCardPlaceholder.image),
-                contentDescription = null,
-                modifier = Modifier.fillMaxWidth(),
-                contentScale = ContentScale.FillWidth,
-            )
-
-            Spacer(Modifier.height(dimensionResource(R.dimen.small_content_spacer)))
-
-            Text(
-                text = EditorCardPlaceholder.title,
-                maxLines = 2,
-                style = MaterialTheme.typography.headlineSmall,
-            )
-
-            Row(
-                modifier = Modifier
-                    .padding(vertical = dimensionResource(R.dimen.medium_content_padding)),
-                verticalAlignment = Alignment.CenterVertically,
+            Column(
+                modifier = Modifier.fillMaxSize(),
             ) {
                 Image(
-                    painter = painterResource(EditorCardPlaceholder.resourceImage),
+                    painter = painterResource(EditorCardPlaceholder.image),
                     contentDescription = null,
-                    modifier = Modifier
-                        .size(dimensionResource(R.dimen.small_icon_size))
-                        .clip(CircleShape),
-                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxWidth(),
+                    contentScale = ContentScale.FillWidth,
                 )
 
-                Spacer(Modifier.width(dimensionResource(R.dimen.small_content_spacer)))
+                Spacer(Modifier.height(dimensionResource(R.dimen.small_content_spacer)))
 
                 Text(
-                    text = EditorCardPlaceholder.resourceName,
-                    color = MaterialTheme.colorScheme.onSecondaryContainer,
-                    maxLines = 1,
+                    text = EditorCardPlaceholder.title,
+                    maxLines = 2,
+                    style = MaterialTheme.typography.headlineSmall,
+                )
+
+                Row(
+                    modifier = Modifier
+                        .padding(vertical = dimensionResource(R.dimen.medium_content_padding)),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Image(
+                        painter = painterResource(EditorCardPlaceholder.resourceImage),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(dimensionResource(R.dimen.small_icon_size))
+                            .clip(CircleShape),
+                        contentScale = ContentScale.Crop,
+                    )
+
+                    Spacer(Modifier.width(dimensionResource(R.dimen.small_content_spacer)))
+
+                    Text(
+                        text = EditorCardPlaceholder.resourceName,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        maxLines = 1,
+                        style = MaterialTheme.typography.labelMedium,
+                    )
+                }
+
+                Text(
+                    text = "${EditorCardPlaceholder.addedTime} | ${EditorCardPlaceholder.timeToRead}",
+                    color = MaterialTheme.colorScheme.onTertiaryContainer,
                     style = MaterialTheme.typography.labelMedium,
                 )
             }
 
-            Text(
-                text = "${EditorCardPlaceholder.addedTime} | ${EditorCardPlaceholder.timeToRead}",
-                color = MaterialTheme.colorScheme.onTertiaryContainer,
-                style = MaterialTheme.typography.labelMedium,
-            )
+            var isSaved by rememberSaveable { mutableStateOf(false) }
+            IconToggleButton(
+                checked = isSaved,
+                onCheckedChange = { isSaved = !isSaved },
+                modifier = Modifier.align(Alignment.TopEnd),
+                colors = IconButtonDefaults.iconToggleButtonColors(
+                    contentColor = MaterialTheme.colorScheme.onSecondary,
+                )
+            ) {
+                Icon(
+                    painter = painterResource(
+                        if (isSaved) R.drawable.save_icon_filled
+                        else R.drawable.save_icon_outline
+                    ),
+                    contentDescription = stringResource(R.string.bookmarks_save_content_description),
+                    modifier = Modifier.size(dimensionResource(R.dimen.medium_icon_size)),
+                )
+            }
         }
     }
 }

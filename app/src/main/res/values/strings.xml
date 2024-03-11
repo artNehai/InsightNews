@@ -6,6 +6,7 @@
     <string name="editor_choice_section">Editor\'s Choice</string>
 
     <string name="search_content_description">Search</string>
+    <string name="bookmarks_save_content_description">Save to bookmarks</string>
 
     <string name="feed_nav_label">Feed</string>
     <string name="explore_nav_label">Explore</string>
