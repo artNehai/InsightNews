@@ -2,7 +2,7 @@
     <string name="app_name">Insight News</string>
 
     <string name="explore_screen_title">Explore</string>
-    <string name="bookmarks_screen_title">Bookmarks</string>
+    <string name="saved_screen_title">Saved Articles</string>
 
     <string name="editor_choice_section">Editor\'s Choice</string>
     <string name="empty_bookmarks_screen_notice">You haven\'t saved any articles yet.</string>

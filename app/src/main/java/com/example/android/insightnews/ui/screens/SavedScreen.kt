@@ -25,14 +25,14 @@ import com.example.android.insightnews.R
 import com.example.android.insightnews.ui.theme.InsightNewsTheme
 
 @Composable
-fun BookmarksScreen(
+fun SavedScreen(
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
         modifier = modifier,
         topBar = {
             Text(
-                text = stringResource(R.string.bookmarks_screen_title),
+                text = stringResource(R.string.saved_screen_title),
                 style = MaterialTheme.typography.titleMedium,
             )
         },
@@ -73,8 +73,8 @@ fun BookmarksScreen(
 
 @Preview(showBackground = true)
 @Composable
-private fun BookmarksScreenPreview() {
+private fun SavedArticlesScreenPreview() {
     InsightNewsTheme {
-        BookmarksScreen()
+        SavedScreen()
     }
 }

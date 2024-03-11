@@ -1,4 +1,4 @@
-package com.example.android.insightnews.ui
+package com.example.android.insightnews.ui.navigation
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
@@ -18,8 +18,14 @@ import androidx.compose.ui.unit.dp
 import com.example.android.insightnews.R
 import com.example.android.insightnews.ui.theme.InsightNewsTheme
 
+val BottomNavItems = listOf(
+    ExploreNavigationDestination,
+    SavedNavigationDestination,
+)
+
 @Composable
 fun BottomNavBar(
+    onItemClick: (NavigationDestination) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column {
@@ -31,44 +37,27 @@ fun BottomNavBar(
             for (navItem in BottomNavItems) {
                 NavigationBarItem(
                     selected = false,
-                    onClick = { /*TODO*/ },
+                    onClick = { onItemClick(navItem) },
                     icon = {
                         Icon(
-                            painter = painterResource(navItem.icon),
+                            painter = painterResource(navItem.iconId),
                             contentDescription = null,
                             modifier = Modifier.size(dimensionResource(R.dimen.large_icon_size))
                         )
                     },
-                    label = { Text(stringResource(navItem.label)) }
+                    label = { Text(stringResource(navItem.labelId)) }
                 )
             }
         }
     }
 }
 
-val BottomNavItems = listOf(
-    NavigationItem(
-        icon = R.drawable.grid_icon,
-        label = R.string.feed_nav_label,
-    ),
-    NavigationItem(
-        icon = R.drawable.explore_icon,
-        label = R.string.explore_nav_label,
-    ),
-    NavigationItem(
-        icon = R.drawable.save_icon_outline,
-        label = R.string.saved_nav_label,
-    ),
-    NavigationItem(
-        icon = R.drawable.user_icon,
-        label = R.string.profile_nav_label,
-    ),
-)
-
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun BottomNavBarPreview() {
     InsightNewsTheme {
-        BottomNavBar()
+        BottomNavBar(
+            onItemClick = {},
+        )
     }
 }
