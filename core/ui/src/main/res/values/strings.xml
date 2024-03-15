@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Insight News</string>
+
+    <string name="explore_screen_title">Explore</string>
+    <string name="saved_screen_title">Saved Articles</string>
+
+    <string name="editor_choice_section">Editor\'s Choice</string>
+    <string name="empty_bookmarks_screen_notice">You haven\'t saved any articles yet.</string>
+
+    <string name="search_content_description">Search</string>
+    <string name="bookmarks_save_content_description">Save to bookmarks</string>
+
+    <string name="feed_nav_label">Feed</string>
+    <string name="explore_nav_label">Explore</string>
+    <string name="saved_nav_label">Saved</string>
+    <string name="profile_nav_label">Profile</string>
+</resources>

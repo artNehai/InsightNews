@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "InsightNews"
 include(":app")
- 
+include(":core:ui")
+include(":feature:explore")
+include(":feature:saved")

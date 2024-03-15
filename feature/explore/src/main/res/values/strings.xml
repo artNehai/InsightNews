@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="explore_screen_title">Explore</string>
+
+    <string name="editor_choice_section">Editor\'s Choice</string>
+
+    <string name="search_content_description">Search</string>
+    <string name="bookmarks_save_content_description">Save to bookmarks</string>
+</resources>
