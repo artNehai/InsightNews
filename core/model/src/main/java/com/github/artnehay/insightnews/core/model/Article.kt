@@ -10,8 +10,3 @@ data class Article(
     val publishedAt: String,
     val content: String,
 )
-
-data class SourceHeader(
-    val id: String,
-    val name: String,
-)
