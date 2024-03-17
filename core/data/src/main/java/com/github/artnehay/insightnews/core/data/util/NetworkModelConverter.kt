@@ -9,26 +9,27 @@ import com.github.artnehay.insightnews.core.network.model.NetworkSourceHeader
 
 fun NetworkArticle.toArticle() = Article(
     source = this.networkSourceHeader.toSourceHeader(),
-    author = this.author,
-    title = this.title,
-    description = this.description,
-    url = this.url,
-    urlToImage = this.urlToImage,
-    publishedAt = this.publishedAt,
-    content = this.content,
+    author = this.author ?: "",
+    title = this.title ?: "",
+    description = this.description ?: "",
+    url = this.url ?: "",
+    urlToImage = this.urlToImage ?: "",
+    publishedAt = this.publishedAt ?: "",
+    content = this.content ?: "",
 )
 
 fun NetworkSource.toSource() = Source(
-    id = this.id,
-    name = this.name,
-    description = this.description,
-    url = this.url,
-    category = this.category,
-    language = this.language,
-    country = this.country,
+    id = this.id ?: "",
+    name = this.name ?: "",
+    description = this.description ?: "",
+    url = this.url ?: "",
+    category = this.category ?: "",
+    language = this.language ?: "",
+    country = this.country ?: "",
 )
 
 fun NetworkSourceHeader.toSourceHeader() = SourceHeader(
-    id = this.id,
-    name = this.name,
+    id = this.id ?: "",
+    name = this.name ?: "",
 )
+

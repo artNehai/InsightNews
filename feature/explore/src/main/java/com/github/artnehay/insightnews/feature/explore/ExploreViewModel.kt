@@ -1,7 +1,8 @@
 package com.github.artnehay.insightnews.feature.explore
 
-import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.artnehay.insightnews.core.data.ArticlesRepository
@@ -12,8 +13,8 @@ class ExploreViewModel(
     private val articlesRepository: ArticlesRepository,
 ) : ViewModel() {
 
-    private val _exploreUiState = mutableStateOf(ExploreUiState())
-    val exploreUiState: State<ExploreUiState> = _exploreUiState
+    var exploreUiState by mutableStateOf(ExploreUiState())
+        private set
 
     private var currentHeadlinesPage = 1
 
@@ -24,7 +25,7 @@ class ExploreViewModel(
     fun fetchNewTopHeadlines() {
         viewModelScope.launch {
             val newHeadlines = articlesRepository.getTopHeadlines(currentHeadlinesPage)
-            _exploreUiState.value = _exploreUiState.value.complementHeadlines(newHeadlines)
+            exploreUiState = exploreUiState.complementHeadlines(newHeadlines)
             currentHeadlinesPage++
         }
     }
