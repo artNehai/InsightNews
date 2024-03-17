@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
@@ -37,11 +38,14 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.ui.ArticleCard
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
 
 @Composable
 fun ExploreScreen(
+    viewModel: ExploreViewModel,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(modifier.fillMaxSize()) {
@@ -67,8 +71,8 @@ fun ExploreScreen(
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.medium_content_spacer)),
                 ) {
-                    items(5) {
-                        EditorChoiceCard()
+                    items(viewModel.exploreUiState.topHeadlines) {
+                        EditorChoiceCard(article = it)
                     }
                 }
 
@@ -130,6 +134,7 @@ fun SearchBarButton(
 
 @Composable
 fun EditorChoiceCard(
+    article: Article,
     modifier: Modifier = Modifier,
 ) {
     Card(
@@ -155,7 +160,7 @@ fun EditorChoiceCard(
                 Spacer(Modifier.height(dimensionResource(R.dimen.small_content_spacer)))
 
                 Text(
-                    text = EditorCardPlaceholder.title,
+                    text = article.title,
                     maxLines = 2,
                     style = MaterialTheme.typography.headlineSmall,
                 )
@@ -177,7 +182,7 @@ fun EditorChoiceCard(
                     Spacer(Modifier.width(dimensionResource(R.dimen.small_content_spacer)))
 
                     Text(
-                        text = EditorCardPlaceholder.resourceName,
+                        text = article.source.name,
                         color = MaterialTheme.colorScheme.onSecondaryContainer,
                         maxLines = 1,
                         style = MaterialTheme.typography.labelMedium,
@@ -185,7 +190,7 @@ fun EditorChoiceCard(
                 }
 
                 Text(
-                    text = "${EditorCardPlaceholder.addedTime} | ${EditorCardPlaceholder.timeToRead}",
+                    text = "${article.publishedAt} | ${EditorCardPlaceholder.timeToRead}",
                     color = MaterialTheme.colorScheme.onTertiaryContainer,
                     style = MaterialTheme.typography.labelMedium,
                 )
@@ -229,6 +234,6 @@ object EditorCardPlaceholder {
 @Composable
 private fun ExploreScreenPreview() {
     InsightNewsTheme {
-        ExploreScreen()
+        ExploreScreen(viewModel())
     }
 }
