@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 // Not sensitive data
-private const val apiKey = "8bbfa19122374be490b93afe33f83d73
+private const val apiKey = "8bbfa19122374be490b93afe33f83d73"
 private const val BaseUrl = "https://newsapi.org"
 
 private val retrofit: Retrofit = Retrofit.Builder()
