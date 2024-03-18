@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -11,8 +13,16 @@ android {
     defaultConfig {
         minSdk = 24
 
+        val properties = Properties()
+        properties.load(rootProject.file("local.properties").inputStream())
+        buildConfigField("String", "API_KEY", properties.getProperty("news.api.key"))
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
