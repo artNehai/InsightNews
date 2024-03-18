@@ -12,8 +12,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Get local.properties from secrets
-        env:        
-          APIKEY: ${{ secrets.LOCAL_PROPERTIES }}
-        run: |
-          sed "s|APIKEY|$APIKEY|g;" local.defaults.properties > local.properties
+        run: echo "${{secrets.LOCAL_PROPERTIES }}" > $GITHUB_WORKSPACE/local.properties
 
