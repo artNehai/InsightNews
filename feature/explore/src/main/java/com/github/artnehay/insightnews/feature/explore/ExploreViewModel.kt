@@ -16,17 +16,14 @@ class ExploreViewModel(
     var exploreUiState by mutableStateOf(ExploreUiState())
         private set
 
-    private var currentHeadlinesPage = 1
-
     init {
-        fetchNewTopHeadlines()
+        fetchTopHeadlines()
     }
 
-    fun fetchNewTopHeadlines() {
+    private fun fetchTopHeadlines() {
         viewModelScope.launch {
-            val newHeadlines = articlesRepository.getTopHeadlines(currentHeadlinesPage)
+            val newHeadlines = articlesRepository.getTopHeadlines()
             exploreUiState = exploreUiState.complementHeadlines(newHeadlines)
-            currentHeadlinesPage++
         }
     }
 }

@@ -1,14 +1,13 @@
 package com.github.artnehay.insightnews
 
 import android.app.Application
-import com.github.artnehay.insightnews.core.data.AppContainer
+import com.github.artnehay.insightnews.core.data.ArticlesRepository
+import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
+@HiltAndroidApp
 class InsightNewsApplication : Application() {
 
-    lateinit var container: AppContainer
-
-    override fun onCreate() {
-        super.onCreate()
-        container = AppContainer()
-    }
+    @Inject
+    lateinit var articlesRepository: ArticlesRepository
 }

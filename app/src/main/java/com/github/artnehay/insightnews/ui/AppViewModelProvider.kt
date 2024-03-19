@@ -10,7 +10,7 @@ object AppViewModelProvider {
     val Factory = viewModelFactory {
         initializer {
             val application = this[APPLICATION_KEY] as InsightNewsApplication
-            ExploreViewModel(application.container.articlesRepository)
+            ExploreViewModel(application.articlesRepository)
         }
     }
 }

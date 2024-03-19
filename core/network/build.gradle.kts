@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.jetbrainsKotlinSerialization)
 }
 
@@ -40,6 +42,8 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.hilt)
+    ksp(libs.hilt.compiler)
     implementation(libs.squareup.retrofit)
     implementation(libs.kotlinx.serialization)
     implementation(libs.jakewharton.retrofit.serialization.converter)
