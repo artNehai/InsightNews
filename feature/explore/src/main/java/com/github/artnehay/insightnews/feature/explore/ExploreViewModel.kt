@@ -7,9 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.artnehay.insightnews.core.data.ArticlesRepository
 import com.github.artnehay.insightnews.core.model.Article
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ExploreViewModel(
+@HiltViewModel
+class ExploreViewModel @Inject constructor(
     private val articlesRepository: ArticlesRepository,
 ) : ViewModel() {
 

@@ -38,15 +38,15 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.ui.ArticleCard
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
 
 @Composable
 fun ExploreScreen(
-    viewModel: ExploreViewModel,
     modifier: Modifier = Modifier,
+    viewModel: ExploreViewModel = hiltViewModel(),
 ) {
     LazyColumn(modifier.fillMaxSize()) {
         item {
@@ -234,6 +234,6 @@ object EditorCardPlaceholder {
 @Composable
 private fun ExploreScreenPreview() {
     InsightNewsTheme {
-        ExploreScreen(viewModel())
+        ExploreScreen()
     }
 }
