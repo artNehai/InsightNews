@@ -1,5 +1,6 @@
 package com.github.artnehay.insightnews.core.data
 
+import com.github.artnehay.insightnews.core.data.di.NewsApiDataSource
 import com.github.artnehay.insightnews.core.data.util.toArticle
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.network.NewsRemoteDataSource
@@ -9,10 +10,11 @@ import javax.inject.Singleton
 
 @Singleton
 class ArticlesRepository @Inject constructor(
-    private val retrofitDataSource: NewsRemoteDataSource,
+    @NewsApiDataSource
+    private val newsApiRemoteDataSource: NewsRemoteDataSource,
 ) {
     suspend fun getTopHeadlines(): List<Article> =
-        retrofitDataSource
+        newsApiRemoteDataSource
             .getTopHeadlines()
             .networkArticles
             .map(NetworkArticle::toArticle)

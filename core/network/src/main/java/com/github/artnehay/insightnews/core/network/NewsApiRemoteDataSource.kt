@@ -7,9 +7,8 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import javax.inject.Inject
-import javax.inject.Singleton
 
-// Not sensitive data
+// Non-sensitive data
 private const val apiKey = "8bbfa19122374be490b93afe33f83d73"
 private const val BaseUrl = "https://newsapi.org"
 
@@ -18,8 +17,7 @@ private interface NewsApiService {
     suspend fun getTopHeadlines(): ArticleResponse
 }
 
-@Singleton
-class NewsRetrofitDataSource @Inject constructor() : NewsRemoteDataSource {
+class NewsApiRemoteDataSource @Inject constructor() : NewsRemoteDataSource {
 
     private val retrofit: NewsApiService = Retrofit.Builder()
         .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
