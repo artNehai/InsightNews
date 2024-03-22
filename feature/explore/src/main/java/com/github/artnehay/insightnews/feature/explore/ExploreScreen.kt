@@ -72,7 +72,7 @@ fun ExploreScreen(
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.medium_content_spacer)),
                 ) {
-                    items(viewModel.exploreUiState.topHeadlines) {
+                    items(listOf(FakeArticle)) {
                         EditorChoiceCard(article = it)
                     }
                 }
