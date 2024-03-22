@@ -39,6 +39,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.github.artnehay.insightnews.core.data.fake.FakeArticle
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.ui.ArticleCard
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
@@ -232,8 +233,16 @@ object EditorCardPlaceholder {
 
 @Preview(showBackground = true)
 @Composable
-private fun ExploreScreenPreview() {
+private fun SearchBarButtonPreview() {
     InsightNewsTheme {
-        ExploreScreen()
+        SearchBarButton()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun EditorChoiceCardPreview() {
+    InsightNewsTheme {
+        EditorChoiceCard(FakeArticle)
     }
 }

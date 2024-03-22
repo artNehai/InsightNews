@@ -1,6 +1,5 @@
 package com.github.artnehay.insightnews.ui
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -8,16 +7,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
 import com.github.artnehay.insightnews.R
-import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
 import com.github.artnehay.insightnews.ui.navigation.BottomNavBar
 import com.github.artnehay.insightnews.ui.navigation.InsightNavHost
 
 @Composable
 fun InsightNewsApp() {
+
     val navController = rememberNavController()
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -40,20 +38,10 @@ fun InsightNewsApp() {
             right = dimensionResource(R.dimen.horizontal_screen_margin),
         )
     ) { insetsPadding ->
+
         InsightNavHost(
             navController = navController,
             modifier = Modifier.padding(insetsPadding),
         )
-    }
-}
-
-@Preview(
-    uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL,
-    showBackground = true,
-)
-@Composable
-private fun ExploreScreenPreview() {
-    InsightNewsTheme {
-        InsightNewsApp()
     }
 }
