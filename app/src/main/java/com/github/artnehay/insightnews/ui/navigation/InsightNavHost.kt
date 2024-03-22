@@ -7,6 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.github.artnehay.insightnews.feature.explore.ExploreScreen
 import com.github.artnehay.insightnews.feature.saved.SavedScreen
+import com.github.artnehay.insightnews.ui.navigation.NavigationDestination.ExploreNavigationDestination
+import com.github.artnehay.insightnews.ui.navigation.NavigationDestination.SavedNavigationDestination
 
 @Composable
 fun InsightNavHost(
@@ -15,7 +17,7 @@ fun InsightNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = ExploreNavigationDestination.route,
+        startDestination = StartDestination.route,
         modifier = modifier,
     ) {
         composable(route = ExploreNavigationDestination.route) {
@@ -26,3 +28,5 @@ fun InsightNavHost(
         }
     }
 }
+
+val StartDestination = ExploreNavigationDestination

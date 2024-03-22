@@ -52,15 +52,9 @@ fun ExploreScreen(
     LazyColumn(modifier.fillMaxSize()) {
         item {
             Column {
-                Text(
-                    text = stringResource(R.string.explore_screen_title),
-                    style = MaterialTheme.typography.titleMedium,
-                )
+                SearchBarButton()
 
-                SearchBarButton(
-                    modifier = Modifier
-                        .padding(vertical = dimensionResource(R.dimen.large_content_padding)),
-                )
+                Spacer(Modifier.height(dimensionResource(R.dimen.medium_content_spacer)))
 
                 Text(
                     text = stringResource(R.string.editor_choice_section),

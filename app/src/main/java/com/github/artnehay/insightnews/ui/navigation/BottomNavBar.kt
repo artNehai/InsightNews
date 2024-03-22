@@ -17,6 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.github.artnehay.insightnews.R
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
+import com.github.artnehay.insightnews.ui.navigation.NavigationDestination.ExploreNavigationDestination
+import com.github.artnehay.insightnews.ui.navigation.NavigationDestination.SavedNavigationDestination
 
 val BottomNavItems = listOf(
     ExploreNavigationDestination,
