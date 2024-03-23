@@ -27,7 +27,7 @@ class ExploreViewModel @Inject constructor(
         fetchTopHeadlines()
     }
 
-    private fun fetchTopHeadlines() {
+    fun fetchTopHeadlines() {
         viewModelScope.launch {
             exploreUiState = try {
                 val newHeadlines = articlesRepository.getTopHeadlines()

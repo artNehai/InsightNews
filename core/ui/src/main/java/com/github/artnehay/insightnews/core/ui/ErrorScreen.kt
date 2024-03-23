@@ -1,11 +1,14 @@
-package com.github.artnehay.insightnews.feature.saved
+package com.github.artnehay.insightnews.core.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,11 +17,12 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.github.artnehay.insightnews.core.ui.NoticeIcon
+import androidx.compose.ui.unit.dp
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
 
 @Composable
-fun SavedScreen(
+fun ErrorScreen(
+    onRetryClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -27,23 +31,41 @@ fun SavedScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         item {
-            NoticeIcon(icon = R.drawable.book_icon)
+            NoticeIcon(icon = R.drawable.wifi_off_icon)
 
             Spacer(Modifier.height(dimensionResource(R.dimen.medium_content_spacer)))
 
             Text(
-                text = stringResource(R.string.empty_bookmarks_screen_notice),
+                text = stringResource(R.string.network_error_message),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.bodySmall,
             )
+
+            Spacer(Modifier.height(dimensionResource(R.dimen.medium_content_spacer)))
+
+            OutlinedButton(
+                onClick = onRetryClick,
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                ),
+                border = BorderStroke(
+                    width = 2.dp,
+                    color = MaterialTheme.colorScheme.outlineVariant,
+                )
+            ) {
+                Text(
+                    text = stringResource(R.string.retry_action),
+                    style = MaterialTheme.typography.labelLarge,
+                )
+            }
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun SavedArticlesScreenPreview() {
+private fun ErrorScreenPreview() {
     InsightNewsTheme {
-        SavedScreen()
+        ErrorScreen(onRetryClick = {})
     }
 }

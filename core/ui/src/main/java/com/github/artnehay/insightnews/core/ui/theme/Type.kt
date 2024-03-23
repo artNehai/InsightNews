@@ -85,7 +85,7 @@ val Typography = Typography(
     labelLarge = TextStyle(
         fontSize = 13.sp,
         fontFamily = InterFontFamily,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Medium,
         lineHeight = 18.sp,
     ),
     labelMedium = TextStyle(

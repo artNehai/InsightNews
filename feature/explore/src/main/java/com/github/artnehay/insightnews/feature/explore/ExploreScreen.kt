@@ -42,12 +42,28 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.github.artnehay.insightnews.core.data.fake.FakeArticle
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.ui.ArticleCard
+import com.github.artnehay.insightnews.core.ui.ErrorScreen
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
+import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Error
 
 @Composable
 fun ExploreScreen(
     modifier: Modifier = Modifier,
     viewModel: ExploreViewModel = hiltViewModel(),
+) {
+    when (viewModel.exploreUiState) {
+        is Error -> ErrorScreen(
+            onRetryClick = { viewModel.fetchTopHeadlines() },
+            modifier = modifier,
+        )
+
+        else -> ResultScreen(modifier)
+    }
+}
+
+@Composable
+fun ResultScreen(
+    modifier: Modifier = Modifier,
 ) {
     LazyColumn(modifier.fillMaxSize()) {
         item {
