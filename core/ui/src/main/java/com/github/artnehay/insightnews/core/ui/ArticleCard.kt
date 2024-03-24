@@ -85,7 +85,8 @@ fun ArticleCard(
             contentDescription = null,
             modifier = Modifier
                 .padding(vertical = dimensionResource(R.dimen.small_content_padding))
-                .size(dimensionResource(R.dimen.article_card_image_size)),
+                .size(dimensionResource(R.dimen.article_card_image_size))
+                .clip(MaterialTheme.shapes.small),
             contentScale = ContentScale.FillBounds,
         )
     }

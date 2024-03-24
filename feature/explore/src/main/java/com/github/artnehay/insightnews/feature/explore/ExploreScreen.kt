@@ -181,7 +181,8 @@ fun EditorChoiceCard(
                     contentDescription = null,
                     modifier = Modifier
                         .height(dimensionResource(R.dimen.editor_choice_image_height))
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .clip(MaterialTheme.shapes.small),
                     contentScale = ContentScale.FillBounds,
                 )
 
