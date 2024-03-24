@@ -38,6 +38,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
@@ -178,14 +179,17 @@ fun EditorChoiceCard(
                         .crossfade(true)
                         .build(),
                     contentDescription = null,
-                    modifier = Modifier.fillMaxWidth(),
-                    contentScale = ContentScale.FillWidth,
+                    modifier = Modifier
+                        .height(dimensionResource(R.dimen.editor_choice_image_height))
+                        .fillMaxWidth(),
+                    contentScale = ContentScale.FillBounds,
                 )
 
                 Spacer(Modifier.height(dimensionResource(R.dimen.small_content_spacer)))
 
                 Text(
                     text = article.title,
+                    overflow = TextOverflow.Ellipsis,
                     maxLines = 2,
                     style = MaterialTheme.typography.headlineSmall,
                 )
@@ -217,6 +221,7 @@ fun EditorChoiceCard(
                 Text(
                     text = "${article.publishedAt} | ${EditorCardPlaceholder.timeToRead}",
                     color = MaterialTheme.colorScheme.onTertiaryContainer,
+                    maxLines = 1,
                     style = MaterialTheme.typography.labelMedium,
                 )
             }
