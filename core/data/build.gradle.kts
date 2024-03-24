@@ -40,6 +40,7 @@ dependencies {
     implementation(project(":core:network"))
 
     implementation(libs.androidx.core.ktx)
+    // Hilt
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
 }

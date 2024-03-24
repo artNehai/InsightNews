@@ -42,8 +42,10 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
+    // Hilt
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
+    // Network
     implementation(libs.squareup.retrofit)
     implementation(libs.kotlinx.serialization)
     implementation(libs.jakewharton.retrofit.serialization.converter)

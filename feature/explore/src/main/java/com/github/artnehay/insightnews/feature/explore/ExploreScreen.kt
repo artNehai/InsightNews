@@ -34,17 +34,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.github.artnehay.insightnews.core.data.fake.FakeArticle
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.ui.ArticleCard
 import com.github.artnehay.insightnews.core.ui.ErrorScreen
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Error
+import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Loading
+import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Success
 
 @Composable
 fun ExploreScreen(
@@ -52,17 +57,23 @@ fun ExploreScreen(
     viewModel: ExploreViewModel = hiltViewModel(),
 ) {
     when (viewModel.exploreUiState) {
+        is Loading -> {}
+
+        is Success -> ResultScreen(
+            topHeadlines = (viewModel.exploreUiState as Success).topHeadlines,
+            modifier = modifier,
+        )
+
         is Error -> ErrorScreen(
             onRetryClick = { viewModel.fetchTopHeadlines() },
             modifier = modifier,
         )
-
-        else -> ResultScreen(modifier)
     }
 }
 
 @Composable
 fun ResultScreen(
+    topHeadlines: List<Article>,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(modifier.fillMaxSize()) {
@@ -82,7 +93,7 @@ fun ResultScreen(
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.medium_content_spacer)),
                 ) {
-                    items(listOf(FakeArticle)) {
+                    items(topHeadlines) {
                         EditorChoiceCard(article = it)
                     }
                 }
@@ -161,8 +172,11 @@ fun EditorChoiceCard(
             Column(
                 modifier = Modifier.fillMaxSize(),
             ) {
-                Image(
-                    painter = painterResource(EditorCardPlaceholder.image),
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(article.urlToImage)
+                        .crossfade(true)
+                        .build(),
                     contentDescription = null,
                     modifier = Modifier.fillMaxWidth(),
                     contentScale = ContentScale.FillWidth,
