@@ -40,6 +40,8 @@ android {
 
 dependencies {
 
+    implementation(project(":core:model"))
+
     implementation(libs.androidx.core.ktx)
     // Compose
     implementation(platform(libs.androidx.compose.bom))

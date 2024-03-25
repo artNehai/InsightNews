@@ -61,7 +61,7 @@ fun ExploreScreen(
         is Loading -> {}
 
         is Success -> ResultScreen(
-            topHeadlines = (viewModel.exploreUiState as Success).topHeadlines,
+            exploreUiState = viewModel.exploreUiState as Success,
             modifier = modifier,
         )
 
@@ -74,7 +74,7 @@ fun ExploreScreen(
 
 @Composable
 fun ResultScreen(
-    topHeadlines: List<Article>,
+    exploreUiState: Success,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(modifier.fillMaxSize()) {
@@ -94,8 +94,11 @@ fun ResultScreen(
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.medium_content_spacer)),
                 ) {
-                    items(topHeadlines) {
-                        EditorChoiceCard(article = it)
+                    items(exploreUiState.topHeadlines) { headline ->
+                        EditorChoiceCard(
+                            article = headline,
+                            timeCaption = exploreUiState.urlToTimeCaption[headline.url] ?: ""
+                        )
                     }
                 }
 
@@ -159,6 +162,7 @@ fun SearchBarButton(
 fun EditorChoiceCard(
     article: Article,
     modifier: Modifier = Modifier,
+    timeCaption: String = "",
 ) {
     Card(
         onClick = {},
@@ -220,7 +224,7 @@ fun EditorChoiceCard(
                 }
 
                 Text(
-                    text = "${article.publishedAt} | ${EditorCardPlaceholder.timeToRead}",
+                    text = timeCaption,
                     color = MaterialTheme.colorScheme.onTertiaryContainer,
                     maxLines = 1,
                     style = MaterialTheme.typography.labelMedium,

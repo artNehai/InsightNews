@@ -7,10 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.artnehay.insightnews.core.data.ArticlesRepository
 import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.ui.util.getTimeCaption
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Error
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Loading
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
@@ -31,7 +34,19 @@ class ExploreViewModel @Inject constructor(
         viewModelScope.launch {
             exploreUiState = try {
                 val newHeadlines = articlesRepository.getTopHeadlines()
-                Success(newHeadlines)
+
+                val urlToTimeCaption = async(Dispatchers.Default) {
+                    val map = mutableMapOf<String, String>()
+                    newHeadlines.forEach {
+                        map[it.url] = it.getTimeCaption()
+                    }
+                    map
+                }
+
+                Success(
+                    topHeadlines = newHeadlines,
+                    urlToTimeCaption = urlToTimeCaption.await(),
+                )
             } catch (_: IOException) {
                 Error
             }
@@ -42,6 +57,7 @@ class ExploreViewModel @Inject constructor(
 sealed interface ExploreUiState {
     data class Success(
         val topHeadlines: List<Article> = listOf(),
+        val urlToTimeCaption: Map<String, String>,
     ) : ExploreUiState
 
     data object Loading : ExploreUiState
