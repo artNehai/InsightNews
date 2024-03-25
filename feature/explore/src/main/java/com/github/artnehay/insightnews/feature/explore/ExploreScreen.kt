@@ -267,16 +267,13 @@ object EditorCardPlaceholder {
 
 @Preview(showBackground = true)
 @Composable
-private fun SearchBarButtonPreview() {
+private fun ResultScreenPreview() {
     InsightNewsTheme {
-        SearchBarButton()
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun EditorChoiceCardPreview() {
-    InsightNewsTheme {
-        HeadlineCard(FakeArticle)
+        ResultScreen(
+            exploreUiState = Success(
+                topHeadlines = listOf(FakeArticle),
+                urlToTimeCaption = mapOf(FakeArticle.url to "Today | 3 min read")
+            ),
+        )
     }
 }
