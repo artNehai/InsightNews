@@ -85,7 +85,7 @@ fun ResultScreen(
                 Spacer(Modifier.height(dimensionResource(R.dimen.medium_content_spacer)))
 
                 Text(
-                    text = stringResource(R.string.editor_choice_section),
+                    text = stringResource(R.string.top_headlines_section),
                     style = MaterialTheme.typography.headlineSmall,
                 )
 
@@ -95,7 +95,7 @@ fun ResultScreen(
                     horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.medium_content_spacer)),
                 ) {
                     items(exploreUiState.topHeadlines) { headline ->
-                        EditorChoiceCard(
+                        HeadlineCard(
                             article = headline,
                             timeCaption = exploreUiState.urlToTimeCaption[headline.url] ?: ""
                         )
@@ -159,7 +159,7 @@ fun SearchBarButton(
 }
 
 @Composable
-fun EditorChoiceCard(
+fun HeadlineCard(
     article: Article,
     modifier: Modifier = Modifier,
     timeCaption: String = "",
@@ -277,6 +277,6 @@ private fun SearchBarButtonPreview() {
 @Composable
 private fun EditorChoiceCardPreview() {
     InsightNewsTheme {
-        EditorChoiceCard(FakeArticle)
+        HeadlineCard(FakeArticle)
     }
 }
