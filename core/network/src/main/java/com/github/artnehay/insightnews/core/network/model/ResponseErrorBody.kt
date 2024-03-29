@@ -3,7 +3,8 @@ package com.github.artnehay.insightnews.core.network.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SourceResponse(
+data class ResponseErrorBody(
     val status: String,
-    val sources: List<NetworkSource>,
+    val code: String,
+    val message: String,
 )

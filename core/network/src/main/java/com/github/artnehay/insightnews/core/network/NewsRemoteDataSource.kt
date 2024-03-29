@@ -1,7 +1,7 @@
 package com.github.artnehay.insightnews.core.network
 
-import com.github.artnehay.insightnews.core.network.model.ArticleResponse
+import com.github.artnehay.insightnews.core.network.model.NetworkArticle
 
 interface NewsRemoteDataSource {
-    suspend fun getTopHeadlines(): ArticleResponse
+    suspend fun getTopHeadlines(): List<NetworkArticle>
 }

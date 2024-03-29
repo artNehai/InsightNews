@@ -1,6 +1,5 @@
 package com.github.artnehay.insightnews.feature.explore
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -65,10 +64,15 @@ fun ExploreScreen(
             modifier = modifier,
         )
 
-        is Error -> ErrorScreen(
-            onRetryClick = { viewModel.fetchTopHeadlines() },
-            modifier = modifier,
-        )
+        is Error -> {
+            val uiState = (viewModel.exploreUiState as Error)
+            ErrorScreen(
+                iconId = uiState.errorIconId,
+                message = uiState.message,
+                onRetryClick = { viewModel.fetchTopHeadlines() },
+                modifier = modifier,
+            )
+        }
     }
 }
 
@@ -205,7 +209,7 @@ fun HeadlineCard(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Image(
-                        painter = painterResource(EditorCardPlaceholder.resourceImage),
+                        painter = painterResource(R.drawable.article_image_placeholder),
                         contentDescription = null,
                         modifier = Modifier
                             .size(dimensionResource(R.dimen.small_icon_size))
@@ -251,18 +255,6 @@ fun HeadlineCard(
             }
         }
     }
-}
-
-object EditorCardPlaceholder {
-    @DrawableRes
-    val image = R.drawable.article_image_placeholder
-    const val title = "Is Blender the Future of 3D modeling and VFX?"
-
-    @DrawableRes
-    val resourceImage = R.drawable.article_image_placeholder
-    val resourceName = "UX Collective"
-    val addedTime = "20 min ago"
-    val timeToRead = "6 min read"
 }
 
 @Preview(showBackground = true)

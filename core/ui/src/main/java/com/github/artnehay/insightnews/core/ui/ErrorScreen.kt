@@ -1,5 +1,6 @@
 package com.github.artnehay.insightnews.core.ui
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
@@ -22,6 +23,8 @@ import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
 
 @Composable
 fun ErrorScreen(
+    @DrawableRes iconId: Int,
+    message: String,
     onRetryClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -31,12 +34,12 @@ fun ErrorScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         item {
-            NoticeIcon(icon = R.drawable.wifi_off_icon)
+            NoticeIcon(iconId)
 
             Spacer(Modifier.height(dimensionResource(R.dimen.medium_content_spacer)))
 
             Text(
-                text = stringResource(R.string.network_error_message),
+                text = message,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.bodySmall,
             )
@@ -66,6 +69,10 @@ fun ErrorScreen(
 @Composable
 private fun ErrorScreenPreview() {
     InsightNewsTheme {
-        ErrorScreen(onRetryClick = {})
+        ErrorScreen(
+            iconId = R.drawable.wifi_off_icon,
+            message = "Error",
+            onRetryClick = {},
+        )
     }
 }

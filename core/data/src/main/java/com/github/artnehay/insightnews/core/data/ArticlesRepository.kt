@@ -16,6 +16,5 @@ class ArticlesRepository @Inject constructor(
     suspend fun getTopHeadlines(): List<Article> =
         newsApiRemoteDataSource
             .getTopHeadlines()
-            .networkArticles
             .map(NetworkArticle::toArticle)
 }

@@ -1,4 +1,3 @@
 <resources>
-    <string name="network_error_message">Failed to connect</string>
     <string name="retry_action">Retry</string>
 </resources>

@@ -16,7 +16,7 @@ import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
 
 @Composable
 fun NoticeIcon(
-    @DrawableRes icon: Int,
+    @DrawableRes iconId: Int,
     modifier: Modifier = Modifier,
 ) {
     Surface(
@@ -24,7 +24,7 @@ fun NoticeIcon(
         color = MaterialTheme.colorScheme.secondaryContainer,
     ) {
         Icon(
-            painter = painterResource(icon),
+            painter = painterResource(iconId),
             contentDescription = null,
             modifier = modifier
                 .padding(dimensionResource(R.dimen.extra_large_content_padding))
@@ -38,6 +38,6 @@ fun NoticeIcon(
 @Composable
 private fun NoticeIconPreview() {
     InsightNewsTheme {
-        NoticeIcon(icon = R.drawable.wifi_off_icon)
+        NoticeIcon(iconId = R.drawable.wifi_off_icon)
     }
 }

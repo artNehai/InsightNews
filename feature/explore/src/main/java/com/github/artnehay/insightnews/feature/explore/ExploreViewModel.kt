@@ -1,5 +1,6 @@
 package com.github.artnehay.insightnews.feature.explore
 
+import androidx.annotation.DrawableRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -7,6 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.artnehay.insightnews.core.data.ArticlesRepository
 import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.network.util.NewsApiException
+import com.github.artnehay.insightnews.core.ui.R.drawable.cloud_off_icon
+import com.github.artnehay.insightnews.core.ui.R.drawable.wifi_off_icon
 import com.github.artnehay.insightnews.core.ui.util.getTimeCaption
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Error
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Loading
@@ -47,20 +51,31 @@ class ExploreViewModel @Inject constructor(
                     topHeadlines = newHeadlines,
                     urlToTimeCaption = urlToTimeCaption.await(),
                 )
-            } catch (_: IOException) {
-                Error
+            } catch (apiE: NewsApiException) {
+                Error(
+                    errorIconId = cloud_off_icon,
+                    message = apiE.message ?: "",
+                )
+            } catch (ioe: IOException) {
+                Error(
+                    errorIconId = wifi_off_icon,
+                    message = ioe.message ?: "",
+                )
             }
         }
     }
 }
 
 sealed interface ExploreUiState {
+    data object Loading : ExploreUiState
+
     data class Success(
         val topHeadlines: List<Article> = listOf(),
         val urlToTimeCaption: Map<String, String>,
     ) : ExploreUiState
 
-    data object Loading : ExploreUiState
-
-    data object Error : ExploreUiState
+    data class Error(
+        @DrawableRes val errorIconId: Int,
+        val message: String,
+    ) : ExploreUiState
 }

@@ -1,9 +1,11 @@
 package com.github.artnehay.insightnews.core.network
 
-import com.github.artnehay.insightnews.core.network.model.ArticleResponse
+import com.github.artnehay.insightnews.core.network.model.NetworkArticle
+import com.github.artnehay.insightnews.core.network.util.handleErrorResponse
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import javax.inject.Inject
@@ -14,7 +16,7 @@ private const val BaseUrl = "https://newsapi.org"
 
 private interface NewsApiService {
     @GET("v2/top-headlines?country=us&apiKey=$apiKey")
-    suspend fun getTopHeadlines(): ArticleResponse
+    suspend fun getTopHeadlines(): Response<List<NetworkArticle>>
 }
 
 class NewsApiRemoteDataSource @Inject constructor() : NewsRemoteDataSource {
@@ -25,6 +27,6 @@ class NewsApiRemoteDataSource @Inject constructor() : NewsRemoteDataSource {
         .build()
         .create(NewsApiService::class.java)
 
-    override suspend fun getTopHeadlines(): ArticleResponse =
-        retrofit.getTopHeadlines()
+    override suspend fun getTopHeadlines(): List<NetworkArticle> =
+        retrofit.getTopHeadlines().handleErrorResponse()
 }

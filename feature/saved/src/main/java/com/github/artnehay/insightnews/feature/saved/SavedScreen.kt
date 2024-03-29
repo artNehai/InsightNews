@@ -27,7 +27,7 @@ fun SavedScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         item {
-            NoticeIcon(icon = R.drawable.book_icon)
+            NoticeIcon(iconId = R.drawable.book_icon)
 
             Spacer(Modifier.height(dimensionResource(R.dimen.medium_content_spacer)))
 
