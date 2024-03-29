@@ -46,6 +46,16 @@ import com.github.artnehay.insightnews.core.data.fake.FakeArticle
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.ui.ArticleCard
 import com.github.artnehay.insightnews.core.ui.ErrorScreen
+import com.github.artnehay.insightnews.core.ui.R.dimen.extra_small_icon_size
+import com.github.artnehay.insightnews.core.ui.R.dimen.large_content_spacer
+import com.github.artnehay.insightnews.core.ui.R.dimen.medium_content_padding
+import com.github.artnehay.insightnews.core.ui.R.dimen.medium_content_spacer
+import com.github.artnehay.insightnews.core.ui.R.dimen.small_content_spacer
+import com.github.artnehay.insightnews.core.ui.R.dimen.small_icon_size
+import com.github.artnehay.insightnews.core.ui.R.drawable.article_image_placeholder
+import com.github.artnehay.insightnews.core.ui.R.drawable.save_icon_filled
+import com.github.artnehay.insightnews.core.ui.R.drawable.save_icon_outline
+import com.github.artnehay.insightnews.core.ui.R.drawable.search_icon
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Error
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Loading
@@ -86,17 +96,18 @@ fun ResultScreen(
             Column {
                 SearchBarButton()
 
-                Spacer(Modifier.height(dimensionResource(R.dimen.medium_content_spacer)))
+                Spacer(Modifier.height(dimensionResource(medium_content_spacer)))
 
                 Text(
                     text = stringResource(R.string.top_headlines_section),
                     style = MaterialTheme.typography.headlineSmall,
                 )
 
-                Spacer(Modifier.height(dimensionResource(R.dimen.small_content_spacer)))
+                Spacer(Modifier.height(dimensionResource(small_content_spacer)))
 
                 LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.medium_content_spacer)),
+                    horizontalArrangement =
+                    Arrangement.spacedBy(dimensionResource(medium_content_spacer)),
                 ) {
                     items(exploreUiState.topHeadlines) { headline ->
                         HeadlineCard(
@@ -106,10 +117,14 @@ fun ResultScreen(
                     }
                 }
 
-                Spacer(Modifier.height(dimensionResource(R.dimen.large_content_spacer)))
+                Spacer(Modifier.height(dimensionResource(large_content_spacer)))
 
                 LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.medium_content_spacer)),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        dimensionResource(
+                            medium_content_spacer
+                        )
+                    ),
                 ) {
                     items(10) {
                         Text(
@@ -123,7 +138,7 @@ fun ResultScreen(
 
         items(5) {
             ArticleCard(
-                modifier = Modifier.padding(vertical = dimensionResource(R.dimen.medium_content_spacer))
+                modifier = Modifier.padding(vertical = dimensionResource(medium_content_spacer))
             )
             if (it < 4) {
                 HorizontalDivider()
@@ -143,15 +158,15 @@ fun SearchBarButton(
     ) {
         Row(
             modifier = Modifier
-                .padding(vertical = dimensionResource(R.dimen.medium_content_padding)),
+                .padding(vertical = dimensionResource(medium_content_padding)),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                painter = painterResource(R.drawable.search_icon),
+                painter = painterResource(search_icon),
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(horizontal = dimensionResource(R.dimen.medium_content_padding))
-                    .size(dimensionResource(R.dimen.small_icon_size)),
+                    .padding(horizontal = dimensionResource(medium_content_padding))
+                    .size(dimensionResource(extra_small_icon_size)),
             )
 
             Text(
@@ -176,7 +191,7 @@ fun HeadlineCard(
     ) {
         Box(
             modifier = Modifier
-                .padding(dimensionResource(R.dimen.medium_content_padding))
+                .padding(dimensionResource(medium_content_padding))
         ) {
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -194,7 +209,7 @@ fun HeadlineCard(
                     contentScale = ContentScale.FillBounds,
                 )
 
-                Spacer(Modifier.height(dimensionResource(R.dimen.small_content_spacer)))
+                Spacer(Modifier.height(dimensionResource(small_content_spacer)))
 
                 Text(
                     text = article.title,
@@ -205,19 +220,19 @@ fun HeadlineCard(
 
                 Row(
                     modifier = Modifier
-                        .padding(vertical = dimensionResource(R.dimen.medium_content_padding)),
+                        .padding(vertical = dimensionResource(medium_content_padding)),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Image(
-                        painter = painterResource(R.drawable.article_image_placeholder),
+                        painter = painterResource(article_image_placeholder),
                         contentDescription = null,
                         modifier = Modifier
-                            .size(dimensionResource(R.dimen.small_icon_size))
+                            .size(dimensionResource(extra_small_icon_size))
                             .clip(CircleShape),
                         contentScale = ContentScale.Crop,
                     )
 
-                    Spacer(Modifier.width(dimensionResource(R.dimen.small_content_spacer)))
+                    Spacer(Modifier.width(dimensionResource(small_content_spacer)))
 
                     Text(
                         text = article.source.name,
@@ -246,11 +261,11 @@ fun HeadlineCard(
             ) {
                 Icon(
                     painter = painterResource(
-                        if (isSaved) R.drawable.save_icon_filled
-                        else R.drawable.save_icon_outline
+                        if (isSaved) save_icon_filled
+                        else save_icon_outline
                     ),
                     contentDescription = stringResource(R.string.bookmarks_save_content_description),
-                    modifier = Modifier.size(dimensionResource(R.dimen.medium_icon_size)),
+                    modifier = Modifier.size(dimensionResource(small_icon_size)),
                 )
             }
         }

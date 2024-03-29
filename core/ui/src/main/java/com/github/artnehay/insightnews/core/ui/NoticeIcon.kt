@@ -28,7 +28,7 @@ fun NoticeIcon(
             contentDescription = null,
             modifier = modifier
                 .padding(dimensionResource(R.dimen.extra_large_content_padding))
-                .size(dimensionResource(R.dimen.large_icon_size)),
+                .size(dimensionResource(R.dimen.medium_icon_size)),
             tint = MaterialTheme.colorScheme.onSecondaryContainer,
         )
     }

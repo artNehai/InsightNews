@@ -13,7 +13,7 @@
     <dimen name="article_card_height">100dp</dimen>
     <dimen name="article_card_image_size">100dp</dimen>
 
-    <dimen name="small_icon_size">16dp</dimen>
-    <dimen name="medium_icon_size">20dp</dimen>
-    <dimen name="large_icon_size">24dp</dimen>
+    <dimen name="extra_small_icon_size">16dp</dimen>
+    <dimen name="small_icon_size">20dp</dimen>
+    <dimen name="medium_icon_size">24dp</dimen>
 </resources>

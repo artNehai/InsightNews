@@ -46,7 +46,7 @@ fun ArticleCard(
                     painter = painterResource(EditorCardPlaceholder.resourceImage),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(dimensionResource(R.dimen.small_icon_size))
+                        .size(dimensionResource(R.dimen.extra_small_icon_size))
                         .clip(CircleShape),
                     contentScale = ContentScale.Crop,
                 )

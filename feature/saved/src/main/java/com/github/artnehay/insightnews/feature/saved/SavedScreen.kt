@@ -15,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.github.artnehay.insightnews.core.ui.NoticeIcon
+import com.github.artnehay.insightnews.core.ui.R.dimen.medium_content_spacer
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
 
 @Composable
@@ -29,7 +30,7 @@ fun SavedScreen(
         item {
             NoticeIcon(iconId = R.drawable.book_icon)
 
-            Spacer(Modifier.height(dimensionResource(R.dimen.medium_content_spacer)))
+            Spacer(Modifier.height(dimensionResource(medium_content_spacer)))
 
             Text(
                 text = stringResource(R.string.empty_bookmarks_screen_notice),
