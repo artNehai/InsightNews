@@ -1,6 +1,7 @@
 package com.github.artnehay.insightnews.core.network
 
 import com.github.artnehay.insightnews.core.network.model.NetworkArticle
+import com.github.artnehay.insightnews.core.network.model.NetworkArticleResponse
 import com.github.artnehay.insightnews.core.network.util.handleErrorResponse
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -16,7 +17,7 @@ private const val BaseUrl = "https://newsapi.org"
 
 private interface NewsApiService {
     @GET("v2/top-headlines?country=us&apiKey=$apiKey")
-    suspend fun getTopHeadlines(): Response<List<NetworkArticle>>
+    suspend fun getTopHeadlines(): Response<NetworkArticleResponse>
 }
 
 class NewsApiRemoteDataSource @Inject constructor() : NewsRemoteDataSource {
@@ -28,5 +29,5 @@ class NewsApiRemoteDataSource @Inject constructor() : NewsRemoteDataSource {
         .create(NewsApiService::class.java)
 
     override suspend fun getTopHeadlines(): List<NetworkArticle> =
-        retrofit.getTopHeadlines().handleErrorResponse()
+        retrofit.getTopHeadlines().handleErrorResponse().articles
 }
