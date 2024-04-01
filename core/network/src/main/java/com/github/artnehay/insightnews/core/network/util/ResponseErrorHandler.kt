@@ -11,11 +11,11 @@ fun <T> Response<T>.handleErrorResponse(): T {
     }
 
     val errorBody = errorBody()?.string()
-    if (errorBody.isNullOrBlank()) throw IOException("Failed to connect")
+    if (errorBody.isNullOrBlank()) throw IOException()
     val decodedError =
         Json.decodeFromString(
             deserializer = ResponseErrorBody.serializer(),
             string = errorBody,
         )
-    throw NewsApiException("Error ${code()} - ${decodedError.message}")
+    throw NewsApiException(message = decodedError.message, code = code())
 }

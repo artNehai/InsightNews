@@ -78,7 +78,7 @@ fun ExploreScreen(
             val uiState = (viewModel.exploreUiState as Error)
             ErrorScreen(
                 iconId = uiState.errorIconId,
-                message = uiState.message,
+                messageId = uiState.message,
                 onRetryClick = { viewModel.fetchTopHeadlines() },
                 modifier = modifier,
             )
@@ -121,10 +121,8 @@ fun ResultScreen(
 
                 LazyRow(
                     horizontalArrangement = Arrangement.spacedBy(
-                        dimensionResource(
-                            medium_content_spacer
-                        )
-                    ),
+                        dimensionResource(medium_content_spacer)
+                    )
                 ) {
                     items(10) {
                         Text(

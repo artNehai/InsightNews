@@ -1,6 +1,7 @@
 package com.github.artnehay.insightnews.core.ui
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
@@ -24,7 +25,7 @@ import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
 @Composable
 fun ErrorScreen(
     @DrawableRes iconId: Int,
-    message: String,
+    @StringRes messageId: Int,
     onRetryClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -39,7 +40,7 @@ fun ErrorScreen(
             Spacer(Modifier.height(dimensionResource(R.dimen.medium_content_spacer)))
 
             Text(
-                text = message,
+                text = stringResource(messageId),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.bodySmall,
             )
@@ -71,7 +72,7 @@ private fun ErrorScreenPreview() {
     InsightNewsTheme {
         ErrorScreen(
             iconId = R.drawable.wifi_off_icon,
-            message = "Error",
+            messageId = R.string.internet_connection_error,
             onRetryClick = {},
         )
     }

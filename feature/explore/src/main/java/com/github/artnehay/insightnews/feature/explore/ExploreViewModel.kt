@@ -1,6 +1,8 @@
 package com.github.artnehay.insightnews.feature.explore
 
+import android.util.Log
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -11,6 +13,8 @@ import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.network.util.NewsApiException
 import com.github.artnehay.insightnews.core.ui.R.drawable.cloud_off_icon
 import com.github.artnehay.insightnews.core.ui.R.drawable.wifi_off_icon
+import com.github.artnehay.insightnews.core.ui.R.string.internet_connection_error
+import com.github.artnehay.insightnews.core.ui.R.string.remote_api_error
 import com.github.artnehay.insightnews.core.ui.util.getTimeCaption
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Error
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Loading
@@ -52,14 +56,22 @@ class ExploreViewModel @Inject constructor(
                     urlToTimeCaption = urlToTimeCaption.await(),
                 )
             } catch (apiE: NewsApiException) {
+                Log.e(
+                    /*tag*/ "ExploreViewModel",
+                    /*msg*/ "Error ${apiE.code} - ${apiE.message}",
+                )
                 Error(
                     errorIconId = cloud_off_icon,
-                    message = apiE.message ?: "",
+                    message = remote_api_error,
                 )
-            } catch (ioe: IOException) {
+            } catch (ioE: IOException) {
+                Log.e(
+                    /*tag*/ "ExploreViewModel",
+                    /*msg*/ ioE.message ?: "IOException when connecting to a remote data source",
+                )
                 Error(
                     errorIconId = wifi_off_icon,
-                    message = ioe.message ?: "",
+                    message = internet_connection_error,
                 )
             }
         }
@@ -76,6 +88,6 @@ sealed interface ExploreUiState {
 
     data class Error(
         @DrawableRes val errorIconId: Int,
-        val message: String,
+        @StringRes val message: Int,
     ) : ExploreUiState
 }
