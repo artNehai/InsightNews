@@ -52,11 +52,12 @@ import com.github.artnehay.insightnews.core.ui.R.dimen.medium_content_padding
 import com.github.artnehay.insightnews.core.ui.R.dimen.medium_content_spacer
 import com.github.artnehay.insightnews.core.ui.R.dimen.small_content_spacer
 import com.github.artnehay.insightnews.core.ui.R.dimen.small_icon_size
-import com.github.artnehay.insightnews.core.ui.R.drawable.article_image_placeholder
 import com.github.artnehay.insightnews.core.ui.R.drawable.save_icon_filled
 import com.github.artnehay.insightnews.core.ui.R.drawable.save_icon_outline
 import com.github.artnehay.insightnews.core.ui.R.drawable.search_icon
+import com.github.artnehay.insightnews.core.ui.R.drawable.unknown_source_favicon
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
+import com.github.artnehay.insightnews.core.ui.util.SourceToFaviconMap
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Error
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Loading
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Success
@@ -106,8 +107,9 @@ fun ResultScreen(
                 Spacer(Modifier.height(dimensionResource(small_content_spacer)))
 
                 LazyRow(
-                    horizontalArrangement =
-                    Arrangement.spacedBy(dimensionResource(medium_content_spacer)),
+                    horizontalArrangement = Arrangement.spacedBy(
+                        dimensionResource(medium_content_spacer)
+                    ),
                 ) {
                     items(exploreUiState.topHeadlines) { headline ->
                         HeadlineCard(
@@ -222,12 +224,17 @@ fun HeadlineCard(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Image(
-                        painter = painterResource(article_image_placeholder),
+                        painter = painterResource(
+                            SourceToFaviconMap.getOrDefault(
+                                key = article.source.id,
+                                defaultValue = unknown_source_favicon,
+                            )
+                        ),
                         contentDescription = null,
                         modifier = Modifier
                             .size(dimensionResource(extra_small_icon_size))
                             .clip(CircleShape),
-                        contentScale = ContentScale.Crop,
+                        contentScale = ContentScale.FillBounds,
                     )
 
                     Spacer(Modifier.width(dimensionResource(small_content_spacer)))
