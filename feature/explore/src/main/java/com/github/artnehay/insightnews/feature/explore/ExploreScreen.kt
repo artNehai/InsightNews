@@ -1,5 +1,6 @@
 package com.github.artnehay.insightnews.feature.explore
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -67,14 +68,7 @@ fun ExploreScreen(
         is Loading -> {}
 
         is Success -> ResultScreen(
-            exploreUiState = viewModel.exploreUiState as Success,
-            onSavedChange = { article, saved ->
-                if (saved) {
-                    viewModel.saveToDatabase(article)
-                } else {
-                    viewModel.removeFromDatabase(article)
-                }
-            },
+            viewModel = viewModel,
             modifier = modifier,
         )
 
@@ -92,10 +86,11 @@ fun ExploreScreen(
 
 @Composable
 fun ResultScreen(
-    exploreUiState: Success,
-    onSavedChange: (Article, Boolean) -> Unit,
+    viewModel: ExploreViewModel,
     modifier: Modifier = Modifier,
 ) {
+    val screenUiState = viewModel.exploreUiState as Success
+
     LazyColumn(modifier.fillMaxSize()) {
         item {
             Column {
@@ -115,11 +110,20 @@ fun ResultScreen(
                         dimensionResource(medium_content_spacer)
                     ),
                 ) {
-                    items(exploreUiState.topHeadlines) { headline ->
+                    items(
+                        items = screenUiState.topHeadlines,
+                        key = { it.url },
+                    ) { headline ->
                         HeadlineCard(
                             article = headline,
-                            onSavedChange = { saved -> onSavedChange(headline, saved) },
-                            timeCaption = exploreUiState.urlToTimeCaption[headline.url] ?: ""
+                            onSavedChange = { saved ->
+                                if (saved) {
+                                    viewModel.saveToDatabase(headline)
+                                } else {
+                                    viewModel.removeFromDatabase(headline)
+                                }
+                            },
+                            timeCaption = screenUiState.urlToTimeCaption[headline.url] ?: ""
                         )
                     }
                 }
@@ -282,16 +286,21 @@ fun HeadlineCard(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL)
 @Composable
-private fun ResultScreenPreview() {
+private fun SearchBarButtonPreview() {
     InsightNewsTheme {
-        ResultScreen(
-            exploreUiState = Success(
-                topHeadlines = listOf(FakeArticle),
-                urlToTimeCaption = mapOf(FakeArticle.url to "Today | 3 min read")
-            ),
-            onSavedChange = { _, _ -> },
+        SearchBarButton()
+    }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES or Configuration.UI_MODE_TYPE_NORMAL)
+@Composable
+private fun HeadlineCardPreview() {
+    InsightNewsTheme {
+        HeadlineCard(
+            article = FakeArticle,
+            onSavedChange = {}
         )
     }
 }
