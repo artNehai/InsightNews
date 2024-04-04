@@ -89,7 +89,7 @@ fun ResultScreen(
     viewModel: ExploreViewModel,
     modifier: Modifier = Modifier,
 ) {
-    val screenUiState = viewModel.exploreUiState as Success
+    val screenUiState = (viewModel.exploreUiState as Success)
 
     LazyColumn(modifier.fillMaxSize()) {
         item {
@@ -104,30 +104,36 @@ fun ResultScreen(
                 )
 
                 Spacer(Modifier.height(dimensionResource(small_content_spacer)))
+            }
+        }
 
-                LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(
-                        dimensionResource(medium_content_spacer)
-                    ),
-                ) {
-                    items(
-                        items = screenUiState.topHeadlines,
-                        key = { it.url },
-                    ) { headline ->
-                        HeadlineCard(
-                            article = headline,
-                            onSavedChange = { saved ->
-                                if (saved) {
-                                    viewModel.saveToDatabase(headline)
-                                } else {
-                                    viewModel.removeFromDatabase(headline)
-                                }
-                            },
-                            timeCaption = screenUiState.urlToTimeCaption[headline.url] ?: ""
-                        )
-                    }
+        item {
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(
+                    dimensionResource(medium_content_spacer)
+                ),
+            ) {
+                items(
+                    items = screenUiState.topHeadlines,
+                    key = { it.url },
+                ) { headline ->
+                    HeadlineCard(
+                        article = headline,
+                        onSavedChange = { saved ->
+                            if (saved) {
+                                viewModel.saveToDatabase(headline)
+                            } else {
+                                viewModel.removeFromDatabase(headline)
+                            }
+                        },
+                        timeCaption = screenUiState.urlToTimeCaption[headline.url] ?: "",
+                    )
                 }
+            }
+        }
 
+        item {
+            Column {
                 Spacer(Modifier.height(dimensionResource(large_content_spacer)))
 
                 LazyRow(
