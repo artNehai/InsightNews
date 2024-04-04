@@ -39,7 +39,7 @@ class ExploreViewModel @Inject constructor(
     }
 
     fun fetchTopHeadlines() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             exploreUiState = try {
                 val newHeadlines = articlesRepository.getTopHeadlines()
 
@@ -75,6 +75,30 @@ class ExploreViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    fun saveToDatabase(article: Article) {
+        val uiState = exploreUiState as Success
+        val headlines = uiState.topHeadlines.toMutableList()
+        headlines.set(
+            index = headlines.indexOf(article),
+            element = article.copy(isSavedToDb = true),
+        )
+        exploreUiState = uiState.copy(
+            topHeadlines = headlines
+        )
+    }
+
+    fun removeFromDatabase(article: Article) {
+        val uiState = exploreUiState as Success
+        val headlines = uiState.topHeadlines.toMutableList()
+        headlines.set(
+            index = headlines.indexOf(article),
+            element = article.copy(isSavedToDb = false),
+        )
+        exploreUiState = uiState.copy(
+            topHeadlines = headlines
+        )
     }
 }
 

@@ -15,6 +15,7 @@ fun NetworkArticle.toArticle() = Article(
     url = this.url ?: "",
     urlToImage = this.urlToImage ?: "",
     publishedAt = this.publishedAt.toLocalDateTime(),
+    isSavedToDb = false,
     content = this.content ?: "",
 )
 

@@ -25,10 +25,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -72,6 +68,13 @@ fun ExploreScreen(
 
         is Success -> ResultScreen(
             exploreUiState = viewModel.exploreUiState as Success,
+            onSavedChange = { article, saved ->
+                if (saved) {
+                    viewModel.saveToDatabase(article)
+                } else {
+                    viewModel.removeFromDatabase(article)
+                }
+            },
             modifier = modifier,
         )
 
@@ -90,6 +93,7 @@ fun ExploreScreen(
 @Composable
 fun ResultScreen(
     exploreUiState: Success,
+    onSavedChange: (Article, Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(modifier.fillMaxSize()) {
@@ -114,6 +118,7 @@ fun ResultScreen(
                     items(exploreUiState.topHeadlines) { headline ->
                         HeadlineCard(
                             article = headline,
+                            onSavedChange = { saved -> onSavedChange(headline, saved) },
                             timeCaption = exploreUiState.urlToTimeCaption[headline.url] ?: ""
                         )
                     }
@@ -180,6 +185,7 @@ fun SearchBarButton(
 @Composable
 fun HeadlineCard(
     article: Article,
+    onSavedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     timeCaption: String = "",
 ) {
@@ -255,10 +261,9 @@ fun HeadlineCard(
                 )
             }
 
-            var isSaved by rememberSaveable { mutableStateOf(false) }
             IconToggleButton(
-                checked = isSaved,
-                onCheckedChange = { isSaved = !isSaved },
+                checked = article.isSavedToDb,
+                onCheckedChange = onSavedChange,
                 modifier = Modifier.align(Alignment.TopEnd),
                 colors = IconButtonDefaults.iconToggleButtonColors(
                     contentColor = MaterialTheme.colorScheme.onSecondary,
@@ -266,7 +271,7 @@ fun HeadlineCard(
             ) {
                 Icon(
                     painter = painterResource(
-                        if (isSaved) save_icon_filled
+                        if (article.isSavedToDb) save_icon_filled
                         else save_icon_outline
                     ),
                     contentDescription = stringResource(R.string.bookmarks_save_content_description),
@@ -286,6 +291,7 @@ private fun ResultScreenPreview() {
                 topHeadlines = listOf(FakeArticle),
                 urlToTimeCaption = mapOf(FakeArticle.url to "Today | 3 min read")
             ),
+            onSavedChange = { _, _ -> },
         )
     }
 }

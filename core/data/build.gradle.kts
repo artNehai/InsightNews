@@ -40,6 +40,10 @@ dependencies {
     implementation(project(":core:network"))
 
     implementation(libs.androidx.core.ktx)
+    // Room
+    implementation(libs.room)
+    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
     // Hilt
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)

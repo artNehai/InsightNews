@@ -11,5 +11,6 @@ val FakeArticle = Article(
     url = "fakeUrl",
     urlToImage = "fakeUrlToImage",
     publishedAt = "12-03-2023",
+    isSavedToDb = false,
     content = "Some content"
 )

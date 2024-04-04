@@ -8,5 +8,6 @@ data class Article(
     val url: String,
     val urlToImage: String,
     val publishedAt: String,
+    val isSavedToDb: Boolean,
     val content: String,
 )
