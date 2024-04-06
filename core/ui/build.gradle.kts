@@ -40,6 +40,7 @@ android {
 
 dependencies {
 
+    implementation(project(":core:data"))
     implementation(project(":core:model"))
 
     implementation(libs.androidx.core.ktx)
@@ -49,6 +50,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    //Coil
+    implementation(libs.coil.compose)
 
     debugImplementation(libs.androidx.ui.tooling)
 }

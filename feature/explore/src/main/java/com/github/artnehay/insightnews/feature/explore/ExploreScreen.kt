@@ -151,11 +151,16 @@ fun ResultScreen(
             }
         }
 
-        items(5) {
+        items(
+            items = screenUiState.topHeadlines,
+            key = { it.url },
+        ) { article ->
             ArticleCard(
-                modifier = Modifier.padding(vertical = dimensionResource(medium_content_spacer))
+                article = article,
+                modifier = Modifier.padding(vertical = dimensionResource(medium_content_spacer)),
+                timeCaption = screenUiState.urlToTimeCaption[article.url] ?: "",
             )
-            if (it < 4) {
+            if (article != screenUiState.topHeadlines.last()) {
                 HorizontalDivider()
             }
         }
@@ -202,8 +207,8 @@ fun HeadlineCard(
     Card(
         onClick = {},
         modifier = modifier
-            .width(dimensionResource(R.dimen.editor_choice_card_width))
-            .height(dimensionResource(R.dimen.editor_choice_card_height)),
+            .width(dimensionResource(R.dimen.headline_card_width))
+            .height(dimensionResource(R.dimen.headline_card_height)),
     ) {
         Box(
             modifier = Modifier
@@ -219,7 +224,7 @@ fun HeadlineCard(
                         .build(),
                     contentDescription = null,
                     modifier = Modifier
-                        .height(dimensionResource(R.dimen.editor_choice_image_height))
+                        .height(dimensionResource(R.dimen.headline_image_height))
                         .fillMaxWidth()
                         .clip(MaterialTheme.shapes.small),
                     contentScale = ContentScale.FillBounds,

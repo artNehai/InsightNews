@@ -1,6 +1,5 @@
 package com.github.artnehay.insightnews.core.ui
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,14 +19,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.github.artnehay.insightnews.core.data.fake.FakeArticle
+import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
+import com.github.artnehay.insightnews.core.ui.util.SourceToFaviconMap
 
 @Composable
 fun ArticleCard(
+    article: Article,
     modifier: Modifier = Modifier,
+    timeCaption: String = "",
 ) {
     Row(
         modifier = modifier
@@ -43,7 +50,12 @@ fun ArticleCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Image(
-                    painter = painterResource(EditorCardPlaceholder.resourceImage),
+                    painter = painterResource(
+                        SourceToFaviconMap.getOrDefault(
+                            key = article.source.id,
+                            defaultValue = R.drawable.unknown_source_favicon,
+                        )
+                    ),
                     contentDescription = null,
                     modifier = Modifier
                         .size(dimensionResource(R.dimen.extra_small_icon_size))
@@ -54,7 +66,7 @@ fun ArticleCard(
                 Spacer(Modifier.width(dimensionResource(R.dimen.small_content_spacer)))
 
                 Text(
-                    text = EditorCardPlaceholder.resourceName,
+                    text = article.source.name,
                     maxLines = 1,
                     style = MaterialTheme.typography.labelMedium,
                 )
@@ -63,13 +75,13 @@ fun ArticleCard(
             Spacer(Modifier.height(dimensionResource(R.dimen.extra_small_content_spacer)))
 
             Text(
-                text = EditorCardPlaceholder.title,
+                text = article.title,
                 maxLines = 2,
                 style = MaterialTheme.typography.headlineSmall,
             )
 
             Text(
-                text = "${EditorCardPlaceholder.addedTime} | ${EditorCardPlaceholder.timeToRead}",
+                text = timeCaption,
                 modifier = Modifier
                     .fillMaxHeight()
                     .wrapContentHeight(Alignment.Bottom),
@@ -80,8 +92,11 @@ fun ArticleCard(
 
         Spacer(Modifier.width(dimensionResource(R.dimen.medium_content_spacer)))
 
-        Image(
-            painter = painterResource(EditorCardPlaceholder.image),
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(article.urlToImage)
+                .crossfade(true)
+                .build(),
             contentDescription = null,
             modifier = Modifier
                 .padding(vertical = dimensionResource(R.dimen.small_content_padding))
@@ -92,22 +107,10 @@ fun ArticleCard(
     }
 }
 
-object EditorCardPlaceholder {
-    @DrawableRes
-    val image = R.drawable.article_image_placeholder
-    const val title = "Is Blender the Future of 3D modeling and VFX?"
-
-    @DrawableRes
-    val resourceImage = R.drawable.article_image_placeholder
-    val resourceName = "UX Collective"
-    val addedTime = "20 min ago"
-    val timeToRead = "6 min read"
-}
-
 @Preview(showBackground = true)
 @Composable
 private fun ArticleCardPreview() {
     InsightNewsTheme {
-        ArticleCard()
+        ArticleCard(article = FakeArticle)
     }
 }

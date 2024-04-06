@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="editor_choice_card_width">200dp</dimen>
-    <dimen name="editor_choice_card_height">235dp</dimen>
-    <dimen name="editor_choice_image_height">120dp</dimen>
+    <dimen name="headline_card_width">200dp</dimen>
+    <dimen name="headline_card_height">235dp</dimen>
+    <dimen name="headline_image_height">120dp</dimen>
 </resources>
