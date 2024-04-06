@@ -42,6 +42,7 @@ fun InsightNewsApp() {
         },
         bottomBar = {
             BottomNavBar(
+                currentDestination = currentDestination,
                 onItemClick = { newDestination ->
                     navController.navigate(newDestination.route) {
                         popUpTo(navController.graph.findStartDestination().id) {

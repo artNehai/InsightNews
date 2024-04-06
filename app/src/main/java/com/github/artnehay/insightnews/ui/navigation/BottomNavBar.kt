@@ -27,6 +27,7 @@ val BottomNavItems = listOf(
 
 @Composable
 fun BottomNavBar(
+    currentDestination: NavigationDestination,
     onItemClick: (NavigationDestination) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -38,7 +39,7 @@ fun BottomNavBar(
         ) {
             for (navItem in BottomNavItems) {
                 NavigationBarItem(
-                    selected = false,
+                    selected = currentDestination == navItem,
                     onClick = { onItemClick(navItem) },
                     icon = {
                         Icon(
@@ -47,7 +48,7 @@ fun BottomNavBar(
                             modifier = Modifier.size(dimensionResource(medium_icon_size))
                         )
                     },
-                    label = { Text(stringResource(navItem.labelId)) }
+                    label = { Text(stringResource(navItem.labelId)) },
                 )
             }
         }
@@ -59,6 +60,7 @@ fun BottomNavBar(
 private fun BottomNavBarPreview() {
     InsightNewsTheme {
         BottomNavBar(
+            currentDestination = ExploreNavigationDestination,
             onItemClick = {},
         )
     }
