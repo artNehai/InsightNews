@@ -101,5 +101,5 @@ from Activities and moved to
 | [Coil](https://github.com/coil-kt/coil) | Load images from URL |
 | [Room Database](https://developer.android.com/training/data-storage/room) | Save the article data locally |
 | [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) | Navigate to different screens in the app |
-| [Scaffold](https://developer.android.com/reference/kotlin/androidx/compose/material/package-summary#scaffold) | Implement top, bottom and snack bars based on material design layout |
+| [Scaffold](https://developer.android.com/reference/kotlin/androidx/compose/material/package-summary#scaffold) | Implement top and bottom bars based on material design layout |
 | [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) | Implement asynchronous flow in the app |
