@@ -1,6 +1,6 @@
 [versions]
 # Plugins
-agp = "8.3.1"
+agp = "8.3.2"
 kotlin = "1.9.22"
 hilt = "2.51"
 hilt-navigation = "1.2.0"
@@ -12,7 +12,7 @@ junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.8.2"
-composeBom = "2024.03.00"
+composeBom = "2024.04.00"
 navigation = "2.7.7"
 viewmodel = "2.7.0"
 coil = "2.6.0"
