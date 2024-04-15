@@ -6,13 +6,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "article")
 data class ArticleEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
     @ColumnInfo(name = "source_id")
     val sourceId: String,
     val author: String,
     val title: String,
     val description: String,
+    @PrimaryKey
     val url: String,
     @ColumnInfo(name = "url_to_image")
     val urlToImage: String,

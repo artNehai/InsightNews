@@ -78,15 +78,20 @@ class ExploreViewModel @Inject constructor(
     }
 
     fun saveToDatabase(article: Article) {
-        val uiState = exploreUiState as Success
-        val headlines = uiState.topHeadlines.toMutableList()
-        headlines.set(
-            index = headlines.indexOf(article),
-            element = article.copy(isSavedToDb = true),
-        )
-        exploreUiState = uiState.copy(
-            topHeadlines = headlines
-        )
+        viewModelScope.launch {
+            articlesRepository.saveToDatabase(article)
+        }
+        viewModelScope.launch {
+            val uiState = exploreUiState as Success
+            val headlines = uiState.topHeadlines.toMutableList()
+            headlines.set(
+                index = headlines.indexOf(article),
+                element = article.copy(isSavedToDb = true),
+            )
+            exploreUiState = uiState.copy(
+                topHeadlines = headlines
+            )
+        }
     }
 
     fun removeFromDatabase(article: Article) {

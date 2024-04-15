@@ -2,6 +2,7 @@ package com.github.artnehay.insightnews.core.data
 
 import com.github.artnehay.insightnews.core.data.di.NewsApiDataSource
 import com.github.artnehay.insightnews.core.data.util.toArticle
+import com.github.artnehay.insightnews.core.data.util.toArticleEntity
 import com.github.artnehay.insightnews.core.database.NewsDatabase
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.network.NewsRemoteDataSource
@@ -19,4 +20,8 @@ class ArticlesRepository @Inject constructor(
         newsApiRemoteDataSource
             .getTopHeadlines()
             .map(NetworkArticle::toArticle)
+
+    suspend fun saveToDatabase(article: Article) {
+        newsDatabase.articleDao().insert(article.toArticleEntity())
+    }
 }
