@@ -14,6 +14,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.github.artnehay.insightnews.core.ui.NoticeIcon
 import com.github.artnehay.insightnews.core.ui.R.dimen.medium_content_spacer
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
@@ -21,6 +22,7 @@ import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
 @Composable
 fun SavedScreen(
     modifier: Modifier = Modifier,
+    viewModel: SavedViewModel = hiltViewModel(),
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),

@@ -7,6 +7,8 @@ import com.github.artnehay.insightnews.core.database.NewsDatabase
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.network.NewsRemoteDataSource
 import com.github.artnehay.insightnews.core.network.model.NetworkArticle
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -24,4 +26,8 @@ class ArticlesRepository @Inject constructor(
     suspend fun saveToDatabase(article: Article) {
         newsDatabase.articleDao().insert(article.toArticleEntity())
     }
+
+    fun getSavedArticles(): Flow<List<Article>> =
+        newsDatabase.articleDao().getAll()
+            .map { list -> list.map { article -> article.toArticle() } }
 }

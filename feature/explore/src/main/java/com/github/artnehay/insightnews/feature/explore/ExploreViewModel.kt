@@ -112,7 +112,7 @@ sealed interface ExploreUiState {
 
     data class Success(
         val topHeadlines: List<Article> = listOf(),
-        val urlToTimeCaption: Map<String, String>,
+        val urlToTimeCaption: Map<String, String> = mapOf(),
     ) : ExploreUiState
 
     data class Error(

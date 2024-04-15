@@ -16,5 +16,5 @@ interface ArticleDao {
     suspend fun delete(article: ArticleEntity)
 
     @Query("SELECT * FROM article")
-    fun getAll(): Flow<ArticleEntity>
+    fun getAll(): Flow<List<ArticleEntity>>
 }
