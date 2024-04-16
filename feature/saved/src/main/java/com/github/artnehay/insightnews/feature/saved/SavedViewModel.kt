@@ -40,7 +40,7 @@ class SavedViewModel @Inject constructor(
             )
             MutableStateFlow(
                 Error(
-                    errorIconId = R.drawable.wifi_off_icon,
+                    errorIconId = R.drawable.database_icon,
                     message = R.string.internet_connection_error,
                 )
             )
