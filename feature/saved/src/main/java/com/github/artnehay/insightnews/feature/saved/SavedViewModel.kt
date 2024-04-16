@@ -41,7 +41,7 @@ class SavedViewModel @Inject constructor(
             MutableStateFlow(
                 Error(
                     errorIconId = R.drawable.database_icon,
-                    message = R.string.internet_connection_error,
+                    message = R.string.database_connection_error,
                 )
             )
         }
