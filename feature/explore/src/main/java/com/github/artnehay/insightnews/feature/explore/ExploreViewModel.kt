@@ -21,8 +21,8 @@ import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Loading
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import javax.inject.Inject
 
@@ -43,7 +43,7 @@ class ExploreViewModel @Inject constructor(
             exploreUiState = try {
                 val newHeadlines = articlesRepository.getTopHeadlines()
 
-                val urlToTimeCaption = async(Dispatchers.Default) {
+                val urlToTimeCaption = withContext(Dispatchers.Default) {
                     val map = mutableMapOf<String, String>()
                     newHeadlines.forEach {
                         map[it.url] = it.getTimeCaption()
@@ -53,7 +53,7 @@ class ExploreViewModel @Inject constructor(
 
                 Success(
                     topHeadlines = newHeadlines,
-                    urlToTimeCaption = urlToTimeCaption.await(),
+                    urlToTimeCaption = urlToTimeCaption,
                 )
             } catch (apiE: NewsApiException) {
                 Log.e(
