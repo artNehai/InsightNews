@@ -17,5 +17,7 @@ data class ArticleEntity(
     val urlToImage: String,
     @ColumnInfo(name = "published_at")
     val publishedAt: String,
+    @ColumnInfo(name = "time_to_read_min")
+    val timeToReadMin: Int,
     val content: String,
 )

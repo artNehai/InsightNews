@@ -19,11 +19,10 @@ suspend fun List<Article>.getUrlToTimeCaptionMap(): Map<String, String> {
 }
 
 fun Article.getTimeCaption(): String {
-    val timeToReadMin = content.calcTimeToRead() ?: 1
-
     val currentDate = Date()
     val published: Date =
-        SimpleDateFormat.getDateTimeInstance().parse(publishedAt) ?: return timeToReadMin.toString()
+        SimpleDateFormat.getDateTimeInstance().parse(publishedAt)
+            ?: return "$timeToReadMin min read"
 
     val difference: Long = currentDate.time - published.time
     val seconds = TimeUnit.MILLISECONDS.toSeconds(difference)
@@ -43,12 +42,4 @@ fun Article.getTimeCaption(): String {
     }
 
     return "$publishedAgo | $timeToReadMin min read"
-}
-
-private fun String.calcTimeToRead(): Int? {
-    val chars = this
-        .substringAfter("[+")
-        .substringBefore(" chars")
-        .toIntOrNull() ?: return null
-    return chars / 1000 + 1
 }
