@@ -12,6 +12,7 @@ fun Article.toArticleEntity() = ArticleEntity(
     url = url,
     urlToImage = urlToImage,
     publishedAt = publishedAt,
+    timeToReadMin = timeToReadMin,
     content = content,
 )
 
@@ -24,5 +25,6 @@ fun ArticleEntity.toArticle() = Article(
     urlToImage = urlToImage,
     publishedAt = publishedAt,
     isSavedToDb = true,
+    timeToReadMin = timeToReadMin,
     content = content,
 )
