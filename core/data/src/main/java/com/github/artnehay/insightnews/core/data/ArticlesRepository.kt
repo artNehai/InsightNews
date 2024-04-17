@@ -1,6 +1,7 @@
 package com.github.artnehay.insightnews.core.data
 
 import com.github.artnehay.insightnews.core.data.di.NewsApiDataSource
+import com.github.artnehay.insightnews.core.data.util.isEmpty
 import com.github.artnehay.insightnews.core.data.util.toArticle
 import com.github.artnehay.insightnews.core.data.util.toArticleEntity
 import com.github.artnehay.insightnews.core.database.ArticleEntity
@@ -22,6 +23,7 @@ class ArticlesRepository @Inject constructor(
     suspend fun getTopHeadlines(): List<Article> =
         newsApiRemoteDataSource
             .getTopHeadlines()
+            .filterNot(NetworkArticle::isEmpty)
             .map(NetworkArticle::toArticle)
 
     suspend fun saveToDatabase(article: Article) {
