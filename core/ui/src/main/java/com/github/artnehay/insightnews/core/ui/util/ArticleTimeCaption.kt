@@ -2,9 +2,21 @@ package com.github.artnehay.insightnews.core.ui.util
 
 import android.text.format.DateUtils
 import com.github.artnehay.insightnews.core.model.Article
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.concurrent.TimeUnit
+
+suspend fun List<Article>.getUrlToTimeCaptionMap(): Map<String, String> {
+    val map = mutableMapOf<String, String>()
+    withContext(Dispatchers.Default) {
+        forEach { article ->
+            map[article.url] = article.getTimeCaption()
+        }
+    }
+    return map
+}
 
 fun Article.getTimeCaption(): String {
     val timeToReadMin = content.calcTimeToRead() ?: 1
