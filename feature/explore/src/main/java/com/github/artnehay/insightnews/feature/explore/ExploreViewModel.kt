@@ -15,14 +15,13 @@ import com.github.artnehay.insightnews.core.ui.R.drawable.cloud_off_icon
 import com.github.artnehay.insightnews.core.ui.R.drawable.wifi_off_icon
 import com.github.artnehay.insightnews.core.ui.R.string.internet_connection_error
 import com.github.artnehay.insightnews.core.ui.R.string.remote_api_error
-import com.github.artnehay.insightnews.core.ui.util.getTimeCaption
+import com.github.artnehay.insightnews.core.ui.util.getUrlToTimeCaptionMap
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Error
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Loading
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.io.IOException
 import javax.inject.Inject
 
@@ -42,18 +41,9 @@ class ExploreViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             exploreUiState = try {
                 val newHeadlines = articlesRepository.getTopHeadlines()
-
-                val urlToTimeCaption = withContext(Dispatchers.Default) {
-                    val map = mutableMapOf<String, String>()
-                    newHeadlines.forEach {
-                        map[it.url] = it.getTimeCaption()
-                    }
-                    map
-                }
-
                 Success(
                     topHeadlines = newHeadlines,
-                    urlToTimeCaption = urlToTimeCaption,
+                    urlToTimeCaption = newHeadlines.getUrlToTimeCaptionMap(),
                 )
             } catch (apiE: NewsApiException) {
                 Log.e(

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.artnehay.insightnews.core.data.ArticlesRepository
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.ui.R
+import com.github.artnehay.insightnews.core.ui.util.getUrlToTimeCaptionMap
 import com.github.artnehay.insightnews.feature.saved.SavedUiState.Error
 import com.github.artnehay.insightnews.feature.saved.SavedUiState.Loading
 import com.github.artnehay.insightnews.feature.saved.SavedUiState.Success
@@ -25,18 +26,25 @@ class SavedViewModel @Inject constructor(
     articlesRepository: ArticlesRepository,
 ) : ViewModel() {
 
-    var savedUiState: StateFlow<SavedUiState> =
+    val savedUiState: StateFlow<SavedUiState> =
         try {
-            articlesRepository.getSavedArticles().map { Success(it) }
-                .stateIn(
-                    scope = viewModelScope,
-                    started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
-                    initialValue = Loading,
+            articlesRepository.getSavedArticles().map { articles ->
+                Success(
+                    savedArticles = articles,
+                    urlToTimeCaption = articles.getUrlToTimeCaptionMap(),
                 )
-        } catch (ioE: IOException) {
+            }.stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
+                initialValue = Loading,
+            )
+        } catch (e: IOException) {
             Log.e(
-                /*tag*/ "SavedViewModel",
-                /*msg*/ ioE.message ?: "IOException when connecting to the news database",
+                /*tag*/
+                "SavedViewModel",
+                /*msg*/
+                e.message
+                    ?: "${e.javaClass.simpleName} exception occurred when connecting to the news database",
             )
             MutableStateFlow(
                 Error(
