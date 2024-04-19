@@ -1,5 +1,6 @@
 package com.github.artnehay.insightnews.core.data
 
+import android.util.Log
 import com.github.artnehay.insightnews.core.data.di.NewsApiDataSource
 import com.github.artnehay.insightnews.core.data.util.isEmpty
 import com.github.artnehay.insightnews.core.data.util.toArticle
@@ -11,6 +12,7 @@ import com.github.artnehay.insightnews.core.network.NewsRemoteDataSource
 import com.github.artnehay.insightnews.core.network.model.NetworkArticle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -26,9 +28,15 @@ class ArticlesRepository @Inject constructor(
             .filterNot(NetworkArticle::isEmpty)
             .map { it.toArticle(it.isInDatabase()) }
 
-    suspend fun saveToDatabase(article: Article) {
-        newsDatabase.articleDao().insert(article.toArticleEntity())
-    }
+    suspend fun saveToDatabase(article: Article): Boolean =
+        tryAccessDatabase {
+            newsDatabase.articleDao().insert(article.toArticleEntity())
+        }
+
+    suspend fun removeFromDatabase(article: Article): Boolean =
+        tryAccessDatabase {
+            newsDatabase.articleDao().delete(article.toArticleEntity())
+        }
 
     fun getSavedArticles(): Flow<List<Article>> =
         newsDatabase.articleDao().getAll()
@@ -38,4 +46,15 @@ class ArticlesRepository @Inject constructor(
         val articlesInDb = newsDatabase.articleDao().getArticleCount(url ?: "")
         return articlesInDb > 0
     }
+
+    private suspend fun tryAccessDatabase(
+        action: suspend () -> Unit,
+    ): Boolean =
+        try {
+            action()
+            true
+        } catch (e: IOException) {
+            Log.e("ArticlesRepository", e.stackTraceToString())
+            false
+        }
 }

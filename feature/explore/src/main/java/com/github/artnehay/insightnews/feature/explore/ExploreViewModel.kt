@@ -21,6 +21,7 @@ import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Loading
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Success
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
@@ -68,28 +69,29 @@ class ExploreViewModel @Inject constructor(
     }
 
     fun saveToDatabase(article: Article) {
-        viewModelScope.launch {
+        val isSaved = viewModelScope.async {
             articlesRepository.saveToDatabase(article)
         }
         viewModelScope.launch {
-            val uiState = exploreUiState as Success
-            val headlines = uiState.topHeadlines.toMutableList()
-            headlines.set(
-                index = headlines.indexOf(article),
-                element = article.copy(isSavedToDb = true),
-            )
-            exploreUiState = uiState.copy(
-                topHeadlines = headlines
-            )
+            article.updateHeadlineState(isSavedToDb = isSaved.await())
         }
     }
 
     fun removeFromDatabase(article: Article) {
+        val isRemoved = viewModelScope.async {
+            articlesRepository.removeFromDatabase(article)
+        }
+        viewModelScope.launch {
+            article.updateHeadlineState(isSavedToDb = !isRemoved.await())
+        }
+    }
+
+    private fun Article.updateHeadlineState(isSavedToDb: Boolean) {
         val uiState = exploreUiState as Success
         val headlines = uiState.topHeadlines.toMutableList()
         headlines.set(
-            index = headlines.indexOf(article),
-            element = article.copy(isSavedToDb = false),
+            index = headlines.indexOf(this),
+            element = this.copy(isSavedToDb = isSavedToDb),
         )
         exploreUiState = uiState.copy(
             topHeadlines = headlines
