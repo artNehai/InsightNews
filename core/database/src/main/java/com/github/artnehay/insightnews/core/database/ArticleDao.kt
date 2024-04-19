@@ -17,4 +17,7 @@ interface ArticleDao {
 
     @Query("SELECT * FROM article")
     fun getAll(): Flow<List<ArticleEntity>>
+
+    @Query("SELECT COUNT(*) FROM article WHERE url = :url")
+    suspend fun getArticleCount(url: String): Int
 }

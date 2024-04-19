@@ -24,7 +24,7 @@ class ArticlesRepository @Inject constructor(
         newsApiRemoteDataSource
             .getTopHeadlines()
             .filterNot(NetworkArticle::isEmpty)
-            .map(NetworkArticle::toArticle)
+            .map { it.toArticle(it.isInDatabase()) }
 
     suspend fun saveToDatabase(article: Article) {
         newsDatabase.articleDao().insert(article.toArticleEntity())
@@ -33,4 +33,9 @@ class ArticlesRepository @Inject constructor(
     fun getSavedArticles(): Flow<List<Article>> =
         newsDatabase.articleDao().getAll()
             .map { list -> list.map(ArticleEntity::toArticle) }
+
+    private suspend fun NetworkArticle.isInDatabase(): Boolean {
+        val articlesInDb = newsDatabase.articleDao().getArticleCount(url ?: "")
+        return articlesInDb > 0
+    }
 }

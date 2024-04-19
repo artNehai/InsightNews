@@ -7,7 +7,9 @@ import com.github.artnehay.insightnews.core.network.model.NetworkArticle
 import com.github.artnehay.insightnews.core.network.model.NetworkSource
 import com.github.artnehay.insightnews.core.network.model.NetworkSourceHeader
 
-fun NetworkArticle.toArticle() = Article(
+fun NetworkArticle.toArticle(
+    isSavedToDb: Boolean = false,
+) = Article(
     source = this.networkSourceHeader.toSourceHeader(),
     author = this.author ?: "",
     title = this.title ?: "",
@@ -15,7 +17,7 @@ fun NetworkArticle.toArticle() = Article(
     url = this.url ?: "",
     urlToImage = this.urlToImage ?: "",
     publishedAt = this.publishedAt.toLocalDateTime(),
-    isSavedToDb = false,
+    isSavedToDb = isSavedToDb,
     timeToReadMin = this.content?.calcTimeToRead() ?: 0,
     content = this.content ?: "",
 )
@@ -34,4 +36,3 @@ fun NetworkSourceHeader.toSourceHeader() = SourceHeader(
     id = this.id ?: "",
     name = this.name ?: "",
 )
-
