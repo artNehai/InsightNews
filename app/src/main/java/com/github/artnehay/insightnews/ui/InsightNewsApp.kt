@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.github.artnehay.insightnews.R
@@ -22,9 +23,9 @@ import com.github.artnehay.insightnews.ui.navigation.util.topLevelDestination
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InsightNewsApp() {
-
-    val navController = rememberNavController()
+fun InsightNewsApp(
+    navController: NavHostController = rememberNavController(),
+) {
     val currentDestination =
         navController.currentBackStackEntryAsState().value.topLevelDestination()
 
@@ -46,7 +47,7 @@ fun InsightNewsApp() {
                 onItemClick = { newDestination ->
                     navController.navigate(newDestination.route) {
                         popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
+                            saveState = false
                         }
                         launchSingleTop = true
                         restoreState = true

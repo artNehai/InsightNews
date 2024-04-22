@@ -10,6 +10,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -48,6 +49,7 @@ fun BottomNavBar(
                             modifier = Modifier.size(dimensionResource(medium_icon_size))
                         )
                     },
+                    modifier = Modifier.testTag(stringResource(navItem.labelId)),
                     label = { Text(stringResource(navItem.labelId)) },
                 )
             }

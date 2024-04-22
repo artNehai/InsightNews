@@ -10,6 +10,8 @@ import com.github.artnehay.insightnews.feature.saved.SavedScreen
 import com.github.artnehay.insightnews.ui.navigation.NavigationDestination.ExploreNavigationDestination
 import com.github.artnehay.insightnews.ui.navigation.NavigationDestination.SavedNavigationDestination
 
+val StartDestination = ExploreNavigationDestination
+
 @Composable
 fun InsightNavHost(
     navController: NavHostController,
@@ -28,5 +30,3 @@ fun InsightNavHost(
         }
     }
 }
-
-val StartDestination = ExploreNavigationDestination
