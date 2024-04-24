@@ -40,4 +40,8 @@ dependencies {
     implementation(libs.room)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
+
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.kotest.assertions)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

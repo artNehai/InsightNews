@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ArticleDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(article: ArticleEntity)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(article: ArticleEntity): Long
 
     @Delete
     suspend fun delete(article: ArticleEntity)
