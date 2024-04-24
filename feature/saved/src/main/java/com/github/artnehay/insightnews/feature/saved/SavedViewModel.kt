@@ -1,12 +1,9 @@
 package com.github.artnehay.insightnews.feature.saved
 
 import android.util.Log
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.artnehay.insightnews.core.data.ArticlesRepository
-import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.ui.R
 import com.github.artnehay.insightnews.core.ui.util.getUrlToTimeCaptionMap
 import com.github.artnehay.insightnews.feature.saved.SavedUiState.Error
@@ -53,18 +50,4 @@ class SavedViewModel @Inject constructor(
                 )
             )
         }
-}
-
-sealed interface SavedUiState {
-    data object Loading : SavedUiState
-
-    data class Success(
-        val savedArticles: List<Article> = listOf(),
-        val urlToTimeCaption: Map<String, String> = mapOf(),
-    ) : SavedUiState
-
-    data class Error(
-        @DrawableRes val errorIconId: Int,
-        @StringRes val message: Int,
-    ) : SavedUiState
 }

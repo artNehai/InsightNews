@@ -1,5 +1,8 @@
 package com.github.artnehay.insightnews.core.model
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 data class Article(
     val source: SourceHeader,
     val author: String,
@@ -8,7 +11,6 @@ data class Article(
     val url: String,
     val urlToImage: String,
     val publishedAt: String,
-    val isSavedToDb: Boolean,
     val timeToReadMin: Int,
     val content: String,
 )

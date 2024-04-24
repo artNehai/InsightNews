@@ -26,6 +26,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -209,6 +210,7 @@ fun HeadlineCard(
     modifier: Modifier = Modifier,
     timeCaption: String = "",
 ) {
+    val isInDatabase by article.isInDatabase
     Card(
         onClick = {},
         modifier = modifier
@@ -282,7 +284,7 @@ fun HeadlineCard(
             }
 
             IconToggleButton(
-                checked = article.isSavedToDb,
+                checked = isInDatabase,
                 onCheckedChange = onSavedChange,
                 modifier = Modifier.align(Alignment.TopEnd),
                 colors = IconButtonDefaults.iconToggleButtonColors(
@@ -291,7 +293,7 @@ fun HeadlineCard(
             ) {
                 Icon(
                     painter = painterResource(
-                        if (article.isSavedToDb) save_icon_filled
+                        if (isInDatabase) save_icon_filled
                         else save_icon_outline
                     ),
                     contentDescription = stringResource(R.string.bookmarks_save_content_description),
