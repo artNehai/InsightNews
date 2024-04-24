@@ -93,11 +93,7 @@ fun ResultScreen(
 ) {
     val screenUiState = (viewModel.exploreUiState as Success)
 
-    LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
-            .testTag("Explore"),
-    ) {
+    LazyColumn(modifier.fillMaxSize()) {
         item {
             Column {
                 SearchBarButton()
@@ -109,7 +105,7 @@ fun ResultScreen(
                     style = MaterialTheme.typography.headlineSmall,
                 )
 
-                Spacer(Modifier.height(dimensionResource(small_content_spacer)))
+                Spacer(Modifier.height(dimensionResource(small_content_spacer)).testTag("Explore"))
             }
         }
 

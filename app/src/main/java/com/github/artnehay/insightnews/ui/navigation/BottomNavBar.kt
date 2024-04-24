@@ -49,7 +49,7 @@ fun BottomNavBar(
                             modifier = Modifier.size(dimensionResource(medium_icon_size))
                         )
                     },
-                    modifier = Modifier.testTag(stringResource(navItem.labelId)),
+                    modifier = Modifier.testTag(stringResource(navItem.testLabelId)),
                     label = { Text(stringResource(navItem.labelId)) },
                 )
             }

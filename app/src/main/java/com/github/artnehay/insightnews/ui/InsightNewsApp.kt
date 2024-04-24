@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -37,6 +38,7 @@ fun InsightNewsApp(
                     Text(
                         text = stringResource(currentDestination.titleId),
                         style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.testTag(stringResource(currentDestination.testTitleId))
                     )
                 },
             )

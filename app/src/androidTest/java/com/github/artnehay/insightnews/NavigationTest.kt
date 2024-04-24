@@ -3,7 +3,6 @@ package com.github.artnehay.insightnews
 import androidx.activity.compose.setContent
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
@@ -33,27 +32,27 @@ class NavigationTest {
 
     @Test
     fun verifyStartDestination() {
-        composeTestRule.onNodeWithTag("Explore").assertExists()
+        composeTestRule.onNodeWithTagId(StartDestination.testTitleId).assertExists()
         navController.currentDestination?.route shouldBe StartDestination.route
     }
 
     @Test
     fun clickSavedNavOption_navigatesToSavedScreen() {
-        composeTestRule.onNodeWithTagId(SavedNavigationDestination.labelId).performClick()
+        composeTestRule.onNodeWithTagId(SavedNavigationDestination.testLabelId).performClick()
         navController.currentDestination?.route shouldBe SavedNavigationDestination.route
     }
 
     @Test
     fun navigateToAnyScreen_popBackStackUpToStartDestination() {
-        composeTestRule.onNodeWithTagId(SavedNavigationDestination.labelId).performClick()
-        composeTestRule.onNodeWithTagId(StartDestination.labelId).performClick()
+        composeTestRule.onNodeWithTagId(SavedNavigationDestination.testLabelId).performClick()
+        composeTestRule.onNodeWithTagId(StartDestination.testLabelId).performClick()
         navController.currentBackStack.value.size shouldBe backStackInitialSize
     }
 
     @Test
     fun verifyLaunchSingleTopBehaviour() {
-        composeTestRule.onNodeWithTagId(SavedNavigationDestination.labelId).performClick()
-        composeTestRule.onNodeWithTagId(SavedNavigationDestination.labelId).performClick()
+        composeTestRule.onNodeWithTagId(SavedNavigationDestination.testLabelId).performClick()
+        composeTestRule.onNodeWithTagId(SavedNavigationDestination.testLabelId).performClick()
         navController.currentBackStack.value.size shouldBe backStackInitialSize + 1
     }
 

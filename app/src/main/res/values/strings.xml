@@ -4,6 +4,12 @@
     <string name="explore_screen_title">Explore</string>
     <string name="saved_screen_title">Saved Articles</string>
 
+    <string name="explore_test_title">explore title</string>
+    <string name="saved_test_title">Saved Articles</string>
+
     <string name="explore_nav_label">Explore</string>
     <string name="saved_nav_label">Saved</string>
+
+    <string name="explore_nav_test_label">explore label</string>
+    <string name="saved_nav_test_label">saved label</string>
 </resources>
