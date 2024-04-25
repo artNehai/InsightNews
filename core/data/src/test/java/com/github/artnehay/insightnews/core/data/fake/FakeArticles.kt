@@ -1,9 +1,13 @@
-package com.github.artnehay.insightnews.core.database.fake
+package com.github.artnehay.insightnews.core.data.fake
 
-import com.github.artnehay.insightnews.core.database.ArticleEntity
+import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.model.SourceHeader
 
-val FakeArticleEntity1 = ArticleEntity(
-    sourceId = "id1",
+val FakeArticle1 = Article(
+    source = SourceHeader(
+        id = "id1",
+        name = ""
+    ),
     author = "Jack Black",
     title = "Is Blender the Future of 3D modeling and VFX?",
     description = "Some description",
@@ -14,8 +18,11 @@ val FakeArticleEntity1 = ArticleEntity(
     content = "Some content",
 )
 
-val FakeArticleEntity2 = ArticleEntity(
-    sourceId = "id2",
+val FakeArticle2 = Article(
+    source = SourceHeader(
+        id = "id2",
+        name = ""
+    ),
     author = "Dwayne Johns",
     title = "Here is your title, boys",
     description = "Well, I did what I can",
