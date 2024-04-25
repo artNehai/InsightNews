@@ -87,7 +87,7 @@ from Activities and moved to
    <td><code>feature:saved</code></td>
    <td>Displays SavedScreen</td>
    <td>
-     <code>SavedScreen</code>
+     <code>SavedScreen</code> <code>SavedViewModel</code>
    </td>
   </tr>
 </table>
