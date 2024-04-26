@@ -4,13 +4,13 @@ import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.model.SourceHeader
 
 val FakeArticle = Article(
-    source = SourceHeader(id = "", name = "UX Collective"),
+    source = SourceHeader(id = "", name = ""),
     author = "Jack Black",
     title = "Is Blender the Future of 3D modeling and VFX?",
     description = "Some description",
     url = "fakeUrl",
     urlToImage = "fakeUrlToImage",
-    publishedAt = "12-03-2023",
-    timeToReadMin = 12,
+    publishedAt = "Mar 12, 2023, 11:05:12 PM",
+    timeToReadMin = 0,
     content = "Some content",
 )

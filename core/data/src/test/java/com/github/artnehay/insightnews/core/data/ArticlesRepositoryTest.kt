@@ -24,7 +24,7 @@ class ArticlesRepositoryTest {
     private lateinit var articlesRepository: ArticlesRepository
 
     @Before
-    fun createDb() {
+    fun createArticlesRepository() {
         val context: Context = RuntimeEnvironment.getApplication()
         newsDatabase = Room.inMemoryDatabaseBuilder(context, NewsDatabase::class.java)
             // Allowing main thread queries, just for testing.

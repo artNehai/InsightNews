@@ -8,7 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.artnehay.insightnews.core.data.ArticlesRepository
+import com.github.artnehay.insightnews.core.data.IArticlesRepository
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.network.util.NewsApiException
 import com.github.artnehay.insightnews.core.ui.R.drawable.cloud_off_icon
@@ -29,7 +29,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExploreViewModel @Inject constructor(
-    private val articlesRepository: ArticlesRepository,
+    private val articlesRepository: IArticlesRepository,
 ) : ViewModel() {
 
     var exploreUiState by mutableStateOf<ExploreUiState>(Loading)

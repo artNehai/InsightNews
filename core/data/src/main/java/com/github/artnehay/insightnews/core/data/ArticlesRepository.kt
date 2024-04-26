@@ -21,24 +21,24 @@ class ArticlesRepository @Inject constructor(
     @NewsApiDataSource
     private val newsApiRemoteDataSource: NewsRemoteDataSource,
     private val newsDatabase: NewsDatabase,
-) {
-    suspend fun getTopHeadlines(): List<Article> =
+) : IArticlesRepository {
+    override suspend fun getTopHeadlines(): List<Article> =
         newsApiRemoteDataSource
             .getTopHeadlines()
             .filterNot(NetworkArticle::isEmpty)
             .map(NetworkArticle::toArticle)
 
-    suspend fun saveToDatabase(article: Article): Boolean =
+    override suspend fun saveToDatabase(article: Article): Boolean =
         tryAccessDatabase {
             newsDatabase.articleDao().insert(article.toArticleEntity())
         }
 
-    suspend fun removeFromDatabase(article: Article): Boolean =
+    override suspend fun removeFromDatabase(article: Article): Boolean =
         tryAccessDatabase {
             newsDatabase.articleDao().delete(article.toArticleEntity())
         }
 
-    fun getSavedArticles(): Flow<List<Article>> =
+    override fun getSavedArticles(): Flow<List<Article>> =
         newsDatabase.articleDao().getAll()
             .map { list -> list.map(ArticleEntity::toArticle) }
 

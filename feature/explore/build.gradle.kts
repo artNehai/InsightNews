@@ -38,6 +38,10 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.8"
     }
+    testOptions.unitTests {
+        isIncludeAndroidResources = true
+        isReturnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -61,6 +65,10 @@ dependencies {
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.kotest.assertions)
+    testImplementation(libs.kotlinx.coroutines.testing)
 
     debugImplementation(libs.androidx.ui.tooling)
 }
