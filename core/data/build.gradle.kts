@@ -32,6 +32,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    testOptions.unitTests {
+        isIncludeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -39,6 +42,7 @@ dependencies {
     implementation(project(":core:database"))
     implementation(project(":core:model"))
     implementation(project(":core:network"))
+    implementation(project(":core:testing"))
 
     implementation(libs.androidx.core.ktx)
     // Room

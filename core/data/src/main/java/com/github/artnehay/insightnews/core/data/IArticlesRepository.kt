@@ -3,6 +3,7 @@ package com.github.artnehay.insightnews.core.data
 import com.github.artnehay.insightnews.core.model.Article
 import kotlinx.coroutines.flow.Flow
 
+// Interface to provide the FakeArticlesRepository in tests
 interface IArticlesRepository {
     suspend fun getTopHeadlines(): List<Article>
 

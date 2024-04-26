@@ -1,4 +1,4 @@
-package com.github.artnehay.insightnews.feature.explore
+package com.github.artnehay.insightnews.core.testing.fake
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

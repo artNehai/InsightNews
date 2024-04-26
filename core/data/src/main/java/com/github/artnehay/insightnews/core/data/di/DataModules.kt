@@ -1,6 +1,8 @@
 package com.github.artnehay.insightnews.core.data.di
 
 import android.content.Context
+import com.github.artnehay.insightnews.core.data.ArticlesRepository
+import com.github.artnehay.insightnews.core.data.IArticlesRepository
 import com.github.artnehay.insightnews.core.database.NewsDatabase
 import com.github.artnehay.insightnews.core.network.NewsApiRemoteDataSource
 import com.github.artnehay.insightnews.core.network.NewsRemoteDataSource
@@ -24,6 +26,11 @@ abstract class RemoteDataModule {
     abstract fun bindNewsRemoteDataSource(
         newsApiRemoteDataSource: NewsApiRemoteDataSource,
     ): NewsRemoteDataSource
+
+    @Binds
+    abstract fun bindArticlesRepository(
+        articlesRepository: ArticlesRepository,
+    ): IArticlesRepository
 }
 
 @InstallIn(SingletonComponent::class)

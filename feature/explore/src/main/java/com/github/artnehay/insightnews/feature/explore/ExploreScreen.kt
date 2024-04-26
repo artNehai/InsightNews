@@ -41,8 +41,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.github.artnehay.insightnews.core.data.fake.FakeArticle
 import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.testing.fake.FakeArticle1
 import com.github.artnehay.insightnews.core.ui.ArticleCard
 import com.github.artnehay.insightnews.core.ui.ErrorScreen
 import com.github.artnehay.insightnews.core.ui.R.dimen.extra_small_icon_size
@@ -105,7 +105,10 @@ fun ResultScreen(
                     style = MaterialTheme.typography.headlineSmall,
                 )
 
-                Spacer(Modifier.height(dimensionResource(small_content_spacer)).testTag("Explore"))
+                Spacer(
+                    Modifier
+                        .height(dimensionResource(small_content_spacer))
+                        .testTag("Explore"))
             }
         }
 
@@ -313,7 +316,7 @@ private fun SearchBarButtonPreview() {
 private fun HeadlineCardPreview() {
     InsightNewsTheme {
         HeadlineCard(
-            article = FakeArticle,
+            article = FakeArticle1,
             onSavedChange = {}
         )
     }

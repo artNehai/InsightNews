@@ -2,10 +2,10 @@ package com.github.artnehay.insightnews.core.data
 
 import android.content.Context
 import androidx.room.Room
-import com.github.artnehay.insightnews.core.data.fake.FakeArticle1
-import com.github.artnehay.insightnews.core.data.fake.FakeArticle2
 import com.github.artnehay.insightnews.core.data.fake.FakeNewsRemoteDataSource
 import com.github.artnehay.insightnews.core.database.NewsDatabase
+import com.github.artnehay.insightnews.core.testing.fake.FakeArticle1
+import com.github.artnehay.insightnews.core.testing.fake.FakeArticle2
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest

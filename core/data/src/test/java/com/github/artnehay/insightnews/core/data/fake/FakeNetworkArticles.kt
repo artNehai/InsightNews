@@ -2,31 +2,49 @@ package com.github.artnehay.insightnews.core.data.fake
 
 import com.github.artnehay.insightnews.core.network.model.NetworkArticle
 import com.github.artnehay.insightnews.core.network.model.NetworkSourceHeader
+import com.github.artnehay.insightnews.core.testing.fake.Author1
+import com.github.artnehay.insightnews.core.testing.fake.Author2
+import com.github.artnehay.insightnews.core.testing.fake.Content1
+import com.github.artnehay.insightnews.core.testing.fake.Content2
+import com.github.artnehay.insightnews.core.testing.fake.Description1
+import com.github.artnehay.insightnews.core.testing.fake.Description2
+import com.github.artnehay.insightnews.core.testing.fake.RemotePublishedAt1
+import com.github.artnehay.insightnews.core.testing.fake.RemotePublishedAt2
+import com.github.artnehay.insightnews.core.testing.fake.SourceId1
+import com.github.artnehay.insightnews.core.testing.fake.SourceId2
+import com.github.artnehay.insightnews.core.testing.fake.SourceName1
+import com.github.artnehay.insightnews.core.testing.fake.SourceName2
+import com.github.artnehay.insightnews.core.testing.fake.Title1
+import com.github.artnehay.insightnews.core.testing.fake.Title2
+import com.github.artnehay.insightnews.core.testing.fake.Url1
+import com.github.artnehay.insightnews.core.testing.fake.Url2
+import com.github.artnehay.insightnews.core.testing.fake.UrlToImage1
+import com.github.artnehay.insightnews.core.testing.fake.UrlToImage2
 
 val FakeNetworkArticle1 = NetworkArticle(
     networkSourceHeader = NetworkSourceHeader(
-        id = "id1",
-        name = ""
+        id = SourceId1,
+        name = SourceName1,
     ),
-    author = "Jack Black",
-    title = "Is Blender the Future of 3D modeling and VFX?",
-    description = "Some description",
-    url = "fakeUrl1",
-    urlToImage = "fakeUrlToImage1",
-    publishedAt = "2023-03-12T20:05:12Z",
-    content = "Some content",
+    author = Author1,
+    title = Title1,
+    description = Description1,
+    url = Url1,
+    urlToImage = UrlToImage1,
+    publishedAt = RemotePublishedAt1,
+    content = Content1,
 )
 
 val FakeNetworkArticle2 = NetworkArticle(
     networkSourceHeader = NetworkSourceHeader(
-        id = "id2",
-        name = ""
+        id = SourceId2,
+        name = SourceName2,
     ),
-    author = "Dwayne Johns",
-    title = "Here is your title, boys",
-    description = "Well, I did what I can",
-    url = "fakeUrl2",
-    urlToImage = "fakeUrlToImage2",
-    publishedAt = "1905-06-01T11:33:45Z",
-    content = "Content? Why do you need this?",
+    author = Author2,
+    title = Title2,
+    description = Description2,
+    url = Url2,
+    urlToImage = UrlToImage2,
+    publishedAt = RemotePublishedAt2,
+    content = Content2,
 )

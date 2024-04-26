@@ -1,9 +1,10 @@
 package com.github.artnehay.insightnews.feature.explore
 
-import com.github.artnehay.insightnews.core.data.fake.FakeArticle
+import com.github.artnehay.insightnews.core.data.fake.FakeArticlesRepository
+import com.github.artnehay.insightnews.core.testing.fake.FakeArticle1
+import com.github.artnehay.insightnews.core.testing.fake.TestDispatcherRule
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Loading
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Success
-import com.github.artnehay.insightnews.feature.explore.fake.FakeArticlesRepository
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -34,8 +35,8 @@ class ExploreViewModelTest {
         runBlocking {
             delay(100)
             exploreViewModel.exploreUiState shouldBe Success(
-                topHeadlines = listOf(FakeArticle),
-                urlToTimeCaption = mapOf(FakeArticle.url to "Mar 12, 2023 | 0 min read")
+                topHeadlines = listOf(FakeArticle1),
+                urlToTimeCaption = mapOf(FakeArticle1.url to "Mar 12, 2023 | 0 min read")
             )
         }
     }

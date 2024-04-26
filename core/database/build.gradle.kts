@@ -35,6 +35,8 @@ android {
 
 dependencies {
 
+    implementation(project(":core:testing"))
+
     implementation(libs.androidx.core.ktx)
     // Room
     implementation(libs.room)
