@@ -4,4 +4,5 @@
 
     <dimen name="top_drawer_margin">18dp</dimen>
     <dimen name="horizontal_drawer_margin">16dp</dimen>
+    <dimen name="drawer_width">240dp</dimen>
 </resources>

@@ -1,5 +1,6 @@
 package com.github.artnehay.insightnews.ui.navigation.components
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationRail
@@ -25,6 +26,11 @@ fun InsightNavigationRail(
 ) {
     NavigationRail(
         modifier = modifier,
+        windowInsets = WindowInsets(
+            left = dimensionResource(com.github.artnehay.insightnews.R.dimen.horizontal_drawer_margin),
+            top = dimensionResource(com.github.artnehay.insightnews.R.dimen.top_drawer_margin),
+            right = dimensionResource(com.github.artnehay.insightnews.R.dimen.horizontal_drawer_margin),
+        ),
     ) {
         for (navItem in NavigationItems) {
             NavigationRailItem(

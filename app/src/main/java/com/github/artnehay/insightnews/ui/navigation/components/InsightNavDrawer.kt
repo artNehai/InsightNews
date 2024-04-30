@@ -2,6 +2,7 @@ package com.github.artnehay.insightnews.ui.navigation.components
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.PermanentDrawerSheet
@@ -14,6 +15,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.github.artnehay.insightnews.R.dimen.drawer_width
 import com.github.artnehay.insightnews.core.testing.fake.FakeArticle1
 import com.github.artnehay.insightnews.core.ui.R
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
@@ -31,11 +33,12 @@ fun InsightNavDrawer(
     PermanentNavigationDrawer(
         drawerContent = {
             PermanentDrawerSheet(
+                modifier = Modifier.width(dimensionResource(drawer_width)),
                 windowInsets = WindowInsets(
                     left = dimensionResource(com.github.artnehay.insightnews.R.dimen.horizontal_drawer_margin),
                     top = dimensionResource(com.github.artnehay.insightnews.R.dimen.top_drawer_margin),
                     right = dimensionResource(com.github.artnehay.insightnews.R.dimen.horizontal_drawer_margin),
-                )
+                ),
             ) {
                 for (navItem in NavigationItems) {
                     NavigationDrawerItem(
