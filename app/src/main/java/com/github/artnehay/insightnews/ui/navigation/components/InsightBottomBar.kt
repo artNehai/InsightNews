@@ -1,4 +1,4 @@
-package com.github.artnehay.insightnews.ui.navigation
+package com.github.artnehay.insightnews.ui.navigation.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
@@ -18,13 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.github.artnehay.insightnews.core.ui.R.dimen.medium_icon_size
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
+import com.github.artnehay.insightnews.ui.navigation.NavigationDestination
 import com.github.artnehay.insightnews.ui.navigation.NavigationDestination.ExploreNavigationDestination
-import com.github.artnehay.insightnews.ui.navigation.NavigationDestination.SavedNavigationDestination
-
-val BottomNavItems = listOf(
-    ExploreNavigationDestination,
-    SavedNavigationDestination,
-)
 
 @Composable
 fun BottomNavBar(
@@ -38,7 +33,7 @@ fun BottomNavBar(
             modifier = modifier,
             tonalElevation = 0.dp,
         ) {
-            for (navItem in BottomNavItems) {
+            for (navItem in NavigationItems) {
                 NavigationBarItem(
                     selected = currentDestination == navItem,
                     onClick = { onItemClick(navItem) },

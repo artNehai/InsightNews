@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="top_screen_margin">32dp</dimen>
     <dimen name="horizontal_screen_margin">16dp</dimen>
+
+    <dimen name="top_drawer_margin">18dp</dimen>
+    <dimen name="horizontal_drawer_margin">16dp</dimen>
 </resources>

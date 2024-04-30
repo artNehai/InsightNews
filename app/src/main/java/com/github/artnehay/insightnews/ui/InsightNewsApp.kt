@@ -18,8 +18,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.github.artnehay.insightnews.R
-import com.github.artnehay.insightnews.ui.navigation.BottomNavBar
 import com.github.artnehay.insightnews.ui.navigation.InsightNavHost
+import com.github.artnehay.insightnews.ui.navigation.components.BottomNavBar
 import com.github.artnehay.insightnews.ui.navigation.util.topLevelDestination
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,7 +59,6 @@ fun InsightNewsApp(
         },
         contentWindowInsets = WindowInsets(
             left = dimensionResource(R.dimen.horizontal_screen_margin),
-            top = dimensionResource(R.dimen.top_screen_margin),
             right = dimensionResource(R.dimen.horizontal_screen_margin),
         )
     ) { insetsPadding ->
