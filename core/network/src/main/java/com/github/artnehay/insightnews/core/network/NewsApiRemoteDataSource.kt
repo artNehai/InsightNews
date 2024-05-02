@@ -9,6 +9,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
+import retrofit2.http.Query
 import javax.inject.Inject
 
 // Non-sensitive data
@@ -18,6 +19,11 @@ private const val BaseUrl = "https://newsapi.org"
 private interface NewsApiService {
     @GET("v2/top-headlines?country=us&apiKey=$apiKey")
     suspend fun getTopHeadlines(): Response<NetworkArticleResponse>
+
+    @GET("v2/top-headlines?country=us&apiKey=$apiKey")
+    suspend fun getHeadlinesInCategory(
+        @Query("category") categoryUrlPath: String,
+    ): Response<NetworkArticleResponse>
 }
 
 class NewsApiRemoteDataSource @Inject constructor() : NewsRemoteDataSource {
@@ -30,4 +36,7 @@ class NewsApiRemoteDataSource @Inject constructor() : NewsRemoteDataSource {
 
     override suspend fun getTopHeadlines(): List<NetworkArticle> =
         retrofit.getTopHeadlines().handleErrorResponse().articles
+
+    override suspend fun getHeadlinesInCategory(categoryUrlPath: String): List<NetworkArticle> =
+        retrofit.getHeadlinesInCategory(categoryUrlPath).handleErrorResponse().articles
 }

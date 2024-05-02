@@ -42,6 +42,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.network.model.Category
 import com.github.artnehay.insightnews.core.testing.fake.FakeArticle1
 import com.github.artnehay.insightnews.core.ui.ArticleCard
 import com.github.artnehay.insightnews.core.ui.ErrorScreen
@@ -108,7 +109,8 @@ fun ResultScreen(
                 Spacer(
                     Modifier
                         .height(dimensionResource(small_content_spacer))
-                        .testTag("Explore"))
+                        .testTag("Explore")
+                )
             }
         }
 
@@ -122,6 +124,7 @@ fun ResultScreen(
                     items = screenUiState.topHeadlines,
                     key = { it.url },
                 ) { headline ->
+                    val timeCaption = screenUiState.urlToTimeCaption[headline.url]?.value ?: ""
                     HeadlineCard(
                         article = headline,
                         onSavedChange = { saved ->
@@ -131,7 +134,7 @@ fun ResultScreen(
                                 viewModel.removeFromDatabase(headline)
                             }
                         },
-                        timeCaption = screenUiState.urlToTimeCaption[headline.url] ?: "",
+                        timeCaption = timeCaption,
                     )
                 }
             }
@@ -146,9 +149,9 @@ fun ResultScreen(
                         dimensionResource(medium_content_spacer)
                     )
                 ) {
-                    items(10) {
+                    items(Category.entries) {
                         Text(
-                            text = "Topic ${it + 1}",
+                            text = "$it",
                             style = MaterialTheme.typography.headlineSmall,
                         )
                     }
@@ -156,14 +159,16 @@ fun ResultScreen(
             }
         }
 
+        val categorisedHeadlines by screenUiState.categorisedHeadlines
         items(
-            items = screenUiState.topHeadlines,
+            items = categorisedHeadlines,
             key = { it.url },
         ) { article ->
+            val timeCaption = screenUiState.urlToTimeCaption[article.url]?.value ?: ""
             ArticleCard(
                 article = article,
                 modifier = Modifier.padding(vertical = dimensionResource(medium_content_spacer)),
-                timeCaption = screenUiState.urlToTimeCaption[article.url] ?: "",
+                timeCaption = timeCaption,
             )
             if (article != screenUiState.topHeadlines.last()) {
                 HorizontalDivider()

@@ -3,7 +3,10 @@ package com.github.artnehay.insightnews.feature.explore
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.State
 import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.network.model.Category
+import com.github.artnehay.insightnews.core.network.model.Category.Business
 
 sealed interface ExploreUiState {
     data object Loading : ExploreUiState
@@ -11,7 +14,9 @@ sealed interface ExploreUiState {
     @Stable
     data class Success(
         val topHeadlines: List<Article> = listOf(),
-        val urlToTimeCaption: Map<String, String> = mapOf(),
+        val urlToTimeCaption: Map<String, State<String>> = mapOf(),
+        val category: Category = Business,
+        val categorisedHeadlines: State<List<Article>>,
     ) : ExploreUiState
 
     data class Error(

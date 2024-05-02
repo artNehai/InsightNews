@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.artnehay.insightnews.core.data.IArticlesRepository
 import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.network.model.Category
+import com.github.artnehay.insightnews.core.network.model.Category.Business
 import com.github.artnehay.insightnews.core.network.util.NewsApiException
 import com.github.artnehay.insightnews.core.ui.R.drawable.cloud_off_icon
 import com.github.artnehay.insightnews.core.ui.R.drawable.wifi_off_icon
@@ -36,11 +38,14 @@ class ExploreViewModel @Inject constructor(
         private set
 
     private lateinit var savedArticles: StateFlow<List<Article>>
+    private val categoryToHeadlinesMap = mutableMapOf<Category, MutableState<List<Article>>>()
+    private val urlToTimeCaptionMap = mutableMapOf<String, MutableState<String>>()
 
     init {
         viewModelScope.launch {
             savedArticles = articlesRepository.getSavedArticles().stateIn(viewModelScope)
             fetchTopHeadlines()
+            fetchHeadlinesInCategory(Business)
         }
     }
 
@@ -56,9 +61,15 @@ class ExploreViewModel @Inject constructor(
                             )
                         }
                     }
+                newHeadlines.getUrlToTimeCaptionMap().forEach {
+                    urlToTimeCaptionMap.getOrPut(it.key) { mutableStateOf(it.value) }.value = it.value
+                }
                 Success(
                     topHeadlines = newHeadlines,
-                    urlToTimeCaption = newHeadlines.getUrlToTimeCaptionMap(),
+                    urlToTimeCaption = urlToTimeCaptionMap,
+                    categorisedHeadlines = categoryToHeadlinesMap.getOrPut(Business) {
+                        mutableStateOf(listOf())
+                    }
                 )
             } catch (apiE: NewsApiException) {
                 Log.e(
@@ -99,6 +110,37 @@ class ExploreViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         ArticleToIsInDatabasePropertyMap.clear()
+    }
+
+    private fun fetchHeadlinesInCategory(category: Category) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val headlines = articlesRepository.getHeadlinesInCategory(category)
+                headlines.getUrlToTimeCaptionMap().forEach {
+                    urlToTimeCaptionMap.getOrPut(it.key) { mutableStateOf(it.value) }.value = it.value
+                }
+                categoryToHeadlinesMap.getOrPut(category) { mutableStateOf(listOf()) }.value =
+                    headlines
+            } catch (apiE: NewsApiException) {
+                Log.e(
+                    /*tag*/ "ExploreViewModel",
+                    /*msg*/ "Error ${apiE.code} - ${apiE.message}",
+                )
+                exploreUiState = Error(
+                    errorIconId = cloud_off_icon,
+                    message = remote_api_error,
+                )
+            } catch (ioE: IOException) {
+                Log.e(
+                    /*tag*/ "ExploreViewModel",
+                    /*msg*/ ioE.message ?: "IOException when connecting to a remote data source",
+                )
+                exploreUiState = Error(
+                    errorIconId = wifi_off_icon,
+                    message = internet_connection_error,
+                )
+            }
+        }
     }
 
     private fun Article.isSavedToDb(): Boolean =

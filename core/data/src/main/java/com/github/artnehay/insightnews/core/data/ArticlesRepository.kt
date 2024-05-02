@@ -9,6 +9,7 @@ import com.github.artnehay.insightnews.core.database.ArticleEntity
 import com.github.artnehay.insightnews.core.database.NewsDatabase
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.network.NewsRemoteDataSource
+import com.github.artnehay.insightnews.core.network.model.Category
 import com.github.artnehay.insightnews.core.network.model.NetworkArticle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -22,9 +23,16 @@ class ArticlesRepository @Inject constructor(
     private val newsApiRemoteDataSource: NewsRemoteDataSource,
     private val newsDatabase: NewsDatabase,
 ) : IArticlesRepository {
+
     override suspend fun getTopHeadlines(): List<Article> =
         newsApiRemoteDataSource
             .getTopHeadlines()
+            .filterNot(NetworkArticle::isEmpty)
+            .map(NetworkArticle::toArticle)
+
+    override suspend fun getHeadlinesInCategory(category: Category): List<Article> =
+        newsApiRemoteDataSource
+            .getHeadlinesInCategory(category.urlPath)
             .filterNot(NetworkArticle::isEmpty)
             .map(NetworkArticle::toArticle)
 
