@@ -2,6 +2,7 @@ package com.github.artnehay.insightnews.feature.explore
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -11,7 +12,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.artnehay.insightnews.core.data.IArticlesRepository
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.network.model.Category
-import com.github.artnehay.insightnews.core.network.model.Category.Business
+import com.github.artnehay.insightnews.core.network.model.Category.All
 import com.github.artnehay.insightnews.core.network.util.NewsApiException
 import com.github.artnehay.insightnews.core.ui.R.drawable.cloud_off_icon
 import com.github.artnehay.insightnews.core.ui.R.drawable.wifi_off_icon
@@ -39,13 +40,15 @@ class ExploreViewModel @Inject constructor(
 
     private lateinit var savedArticles: StateFlow<List<Article>>
     private val categoryToHeadlinesMap = mutableMapOf<Category, MutableState<List<Article>>>()
+
+    @Stable
     private val urlToTimeCaptionMap = mutableMapOf<String, MutableState<String>>()
 
     init {
         viewModelScope.launch {
             savedArticles = articlesRepository.getSavedArticles().stateIn(viewModelScope)
             fetchTopHeadlines()
-            fetchHeadlinesInCategory(Business)
+            fetchHeadlinesInCategory(All)
         }
     }
 
@@ -64,7 +67,7 @@ class ExploreViewModel @Inject constructor(
                 exploreUiState = Success(
                     topHeadlines = newHeadlines,
                     urlToTimeCaption = urlToTimeCaptionMap,
-                    categorisedHeadlines = categoryToHeadlinesMap.getOrPut(Business) {
+                    categorisedHeadlines = categoryToHeadlinesMap.getOrPut(All) {
                         mutableStateOf(listOf())
                     }
                 )

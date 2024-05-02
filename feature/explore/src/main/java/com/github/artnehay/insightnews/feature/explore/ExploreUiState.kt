@@ -6,7 +6,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.network.model.Category
-import com.github.artnehay.insightnews.core.network.model.Category.Business
+import com.github.artnehay.insightnews.core.network.model.Category.All
 
 sealed interface ExploreUiState {
     data object Loading : ExploreUiState
@@ -15,7 +15,7 @@ sealed interface ExploreUiState {
     data class Success(
         val topHeadlines: List<Article> = listOf(),
         val urlToTimeCaption: Map<String, State<String>> = mapOf(),
-        val category: Category = Business,
+        val category: Category = All,
         val categorisedHeadlines: State<List<Article>>,
     ) : ExploreUiState
 

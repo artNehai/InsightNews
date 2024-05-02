@@ -10,6 +10,7 @@ import com.github.artnehay.insightnews.core.database.NewsDatabase
 import com.github.artnehay.insightnews.core.model.Article
 import com.github.artnehay.insightnews.core.network.NewsRemoteDataSource
 import com.github.artnehay.insightnews.core.network.model.Category
+import com.github.artnehay.insightnews.core.network.model.Category.All
 import com.github.artnehay.insightnews.core.network.model.NetworkArticle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -30,11 +31,19 @@ class ArticlesRepository @Inject constructor(
             .filterNot(NetworkArticle::isEmpty)
             .map(NetworkArticle::toArticle)
 
-    override suspend fun getHeadlinesInCategory(category: Category): List<Article> =
-        newsApiRemoteDataSource
-            .getHeadlinesInCategory(category.urlPath)
-            .filterNot(NetworkArticle::isEmpty)
-            .map(NetworkArticle::toArticle)
+    override suspend fun getHeadlinesInCategory(category: Category): List<Article> {
+        return if (category == All) {
+            newsApiRemoteDataSource
+                .getAllArticles()
+                .filterNot(NetworkArticle::isEmpty)
+                .map(NetworkArticle::toArticle)
+        } else {
+            newsApiRemoteDataSource
+                .getHeadlinesInCategory(category.urlPath)
+                .filterNot(NetworkArticle::isEmpty)
+                .map(NetworkArticle::toArticle)
+        }
+    }
 
     override suspend fun saveToDatabase(article: Article): Boolean =
         tryAccessDatabase {
