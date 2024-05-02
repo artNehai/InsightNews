@@ -51,7 +51,7 @@ class ExploreViewModel @Inject constructor(
 
     fun fetchTopHeadlines() {
         viewModelScope.launch(Dispatchers.IO) {
-            exploreUiState = try {
+            tryFetchingFromRemote {
                 val newHeadlines: List<Article> =
                     articlesRepository.getTopHeadlines().onEach { headline ->
                         if (headline.isSavedToDb()) {
@@ -61,30 +61,12 @@ class ExploreViewModel @Inject constructor(
                 newHeadlines.getUrlToTimeCaptionMap().forEach {
                     urlToTimeCaptionMap.setValue(it.key, it.value)
                 }
-                Success(
+                exploreUiState = Success(
                     topHeadlines = newHeadlines,
                     urlToTimeCaption = urlToTimeCaptionMap,
                     categorisedHeadlines = categoryToHeadlinesMap.getOrPut(Business) {
                         mutableStateOf(listOf())
                     }
-                )
-            } catch (apiE: NewsApiException) {
-                Log.e(
-                    /*tag*/ "ExploreViewModel",
-                    /*msg*/ "Error ${apiE.code} - ${apiE.message}",
-                )
-                Error(
-                    errorIconId = cloud_off_icon,
-                    message = remote_api_error,
-                )
-            } catch (ioE: IOException) {
-                Log.e(
-                    /*tag*/ "ExploreViewModel",
-                    /*msg*/ ioE.message ?: "IOException when connecting to a remote data source",
-                )
-                Error(
-                    errorIconId = wifi_off_icon,
-                    message = internet_connection_error,
                 )
             }
         }
@@ -111,36 +93,42 @@ class ExploreViewModel @Inject constructor(
 
     private fun fetchHeadlinesInCategory(category: Category) {
         viewModelScope.launch(Dispatchers.IO) {
-            try {
+            tryFetchingFromRemote {
                 val headlines = articlesRepository.getHeadlinesInCategory(category)
                 headlines.getUrlToTimeCaptionMap().forEach {
                     urlToTimeCaptionMap.setValue(it.key, it.value)
                 }
                 categoryToHeadlinesMap.setValue(category, headlines)
-            } catch (apiE: NewsApiException) {
-                Log.e(
-                    /*tag*/ "ExploreViewModel",
-                    /*msg*/ "Error ${apiE.code} - ${apiE.message}",
-                )
-                exploreUiState = Error(
-                    errorIconId = cloud_off_icon,
-                    message = remote_api_error,
-                )
-            } catch (ioE: IOException) {
-                Log.e(
-                    /*tag*/ "ExploreViewModel",
-                    /*msg*/ ioE.message ?: "IOException when connecting to a remote data source",
-                )
-                exploreUiState = Error(
-                    errorIconId = wifi_off_icon,
-                    message = internet_connection_error,
-                )
             }
         }
     }
 
     private fun Article.isSavedToDb(): Boolean =
         this.url in savedArticles.value.map { it.url }
+
+    private suspend fun tryFetchingFromRemote(actions: suspend () -> Unit) {
+        try {
+            actions()
+        } catch (apiE: NewsApiException) {
+            Log.e(
+                /*tag*/ "ExploreViewModel",
+                /*msg*/ "Error ${apiE.code} - ${apiE.message}",
+            )
+            exploreUiState = Error(
+                errorIconId = cloud_off_icon,
+                message = remote_api_error,
+            )
+        } catch (ioE: IOException) {
+            Log.e(
+                /*tag*/ "ExploreViewModel",
+                /*msg*/ ioE.message ?: "IOException when connecting to a remote data source",
+            )
+            exploreUiState = Error(
+                errorIconId = wifi_off_icon,
+                message = internet_connection_error,
+            )
+        }
+    }
 }
 
 private val ArticleToIsInDatabasePropertyMap = mutableMapOf<Article, MutableState<Boolean>>()
