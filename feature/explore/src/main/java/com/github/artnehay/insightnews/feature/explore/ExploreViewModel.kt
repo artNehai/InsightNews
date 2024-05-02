@@ -55,14 +55,11 @@ class ExploreViewModel @Inject constructor(
                 val newHeadlines: List<Article> =
                     articlesRepository.getTopHeadlines().onEach { headline ->
                         if (headline.isSavedToDb()) {
-                            ArticleToIsInDatabasePropertyMap.setValue(
-                                article = headline,
-                                value = true,
-                            )
+                            ArticleToIsInDatabasePropertyMap.setValue(headline, true)
                         }
                     }
                 newHeadlines.getUrlToTimeCaptionMap().forEach {
-                    urlToTimeCaptionMap.getOrPut(it.key) { mutableStateOf(it.value) }.value = it.value
+                    urlToTimeCaptionMap.setValue(it.key, it.value)
                 }
                 Success(
                     topHeadlines = newHeadlines,
@@ -117,10 +114,9 @@ class ExploreViewModel @Inject constructor(
             try {
                 val headlines = articlesRepository.getHeadlinesInCategory(category)
                 headlines.getUrlToTimeCaptionMap().forEach {
-                    urlToTimeCaptionMap.getOrPut(it.key) { mutableStateOf(it.value) }.value = it.value
+                    urlToTimeCaptionMap.setValue(it.key, it.value)
                 }
-                categoryToHeadlinesMap.getOrPut(category) { mutableStateOf(listOf()) }.value =
-                    headlines
+                categoryToHeadlinesMap.setValue(category, headlines)
             } catch (apiE: NewsApiException) {
                 Log.e(
                     /*tag*/ "ExploreViewModel",

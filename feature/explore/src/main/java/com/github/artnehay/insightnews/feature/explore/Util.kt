@@ -2,11 +2,10 @@ package com.github.artnehay.insightnews.feature.explore
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import com.github.artnehay.insightnews.core.model.Article
 
-fun MutableMap<Article, MutableState<Boolean>>.setValue(
-    article: Article,
-    value: Boolean,
+fun <K, V> MutableMap<K, MutableState<V>>.setValue(
+    key: K,
+    value: V,
 ) {
-    this.getOrPut(article) { mutableStateOf(value) }.value = value
+    this.getOrPut(key) { mutableStateOf(value) }.value = value
 }
