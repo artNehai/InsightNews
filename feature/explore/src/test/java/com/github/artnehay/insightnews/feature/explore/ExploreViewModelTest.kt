@@ -1,7 +1,9 @@
 package com.github.artnehay.insightnews.feature.explore
 
 import com.github.artnehay.insightnews.core.data.fake.FakeArticlesRepository
+import com.github.artnehay.insightnews.core.network.model.Category.All
 import com.github.artnehay.insightnews.core.testing.fake.FakeArticle1
+import com.github.artnehay.insightnews.core.testing.fake.FakeArticle2
 import com.github.artnehay.insightnews.core.testing.fake.TestDispatcherRule
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Loading
 import com.github.artnehay.insightnews.feature.explore.ExploreUiState.Success
@@ -34,10 +36,15 @@ class ExploreViewModelTest {
     fun verifyFetchingTopHeadlinesAtInitialization() {
         runBlocking {
             delay(100)
-            exploreViewModel.exploreUiState shouldBe Success(
-                topHeadlines = listOf(FakeArticle1),
-                urlToTimeCaption = mapOf(FakeArticle1.url to "Mar 12, 2023 | 0 min read")
-            )
+            val resultUiState = exploreViewModel.exploreUiState as Success
+            resultUiState.topHeadlines shouldBe listOf(FakeArticle1)
+            resultUiState.urlToTimeCaption.mapValues { it.value.value } shouldBe
+                    mapOf(
+                        FakeArticle1.url to "Mar 12, 2023 | 0 min read",
+                        FakeArticle2.url to "Jun 1, 1905 | 0 min read",
+                    )
+            resultUiState.category shouldBe All
+            resultUiState.categorisedHeadlines.value shouldBe listOf(FakeArticle2)
         }
     }
 }
