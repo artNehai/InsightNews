@@ -1,6 +1,7 @@
 package com.github.artnehay.insightnews
 
 import androidx.activity.compose.setContent
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.performClick
@@ -26,7 +27,10 @@ class NavigationTest {
         composeTestRule.activity.setContent {
             navController = TestNavHostController(LocalContext.current)
             navController.navigatorProvider.addNavigator(ComposeNavigator())
-            InsightNewsApp(navController = navController)
+            InsightNewsApp(
+                windowWidth = WindowWidthSizeClass.Compact,
+                navController = navController,
+            )
         }
     }
 
