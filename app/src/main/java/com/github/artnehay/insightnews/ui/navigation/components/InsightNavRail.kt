@@ -3,8 +3,10 @@ package com.github.artnehay.insightnews.ui.navigation.components
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -45,6 +47,10 @@ fun InsightNavigationRail(
                 },
                 modifier = Modifier.testTag(stringResource(navItem.testLabelId)),
                 label = { Text(stringResource(navItem.labelId)) },
+                colors = NavigationRailItemDefaults.colors(
+                    selectedIconColor = MaterialTheme.colorScheme.primary,
+                    selectedTextColor = MaterialTheme.colorScheme.primary,
+                ),
             )
         }
     }

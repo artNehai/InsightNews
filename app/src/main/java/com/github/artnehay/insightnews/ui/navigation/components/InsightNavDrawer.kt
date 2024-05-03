@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.PermanentDrawerSheet
 import androidx.compose.material3.PermanentNavigationDrawer
 import androidx.compose.material3.Text
@@ -53,6 +55,10 @@ fun InsightNavDrawer(
                         },
                         modifier = Modifier.testTag(stringResource(navItem.testLabelId)),
                         label = { Text(stringResource(navItem.labelId)) },
+                        colors = NavigationDrawerItemDefaults.colors(
+                            selectedIconColor = MaterialTheme.colorScheme.primary,
+                            selectedTextColor = MaterialTheme.colorScheme.primary,
+                        ),
                     )
                 }
             }
