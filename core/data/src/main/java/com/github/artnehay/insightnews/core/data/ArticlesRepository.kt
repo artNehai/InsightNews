@@ -28,21 +28,16 @@ class ArticlesRepository @Inject constructor(
     override suspend fun getTopHeadlines(): List<Article> =
         newsApiRemoteDataSource
             .getTopHeadlines()
-            .filterNot(NetworkArticle::isEmpty)
-            .map(NetworkArticle::toArticle)
+            .parseNetworkArticles()
 
     override suspend fun getHeadlinesInCategory(category: Category): List<Article> {
-        return if (category == All) {
-            newsApiRemoteDataSource
-                .getAllArticles()
-                .filterNot(NetworkArticle::isEmpty)
-                .map(NetworkArticle::toArticle)
-        } else {
-            newsApiRemoteDataSource
-                .getHeadlinesInCategory(category.urlPath)
-                .filterNot(NetworkArticle::isEmpty)
-                .map(NetworkArticle::toArticle)
-        }
+        val networkArticles =
+            if (category == All) {
+                newsApiRemoteDataSource.getAllArticles()
+            } else {
+                newsApiRemoteDataSource.getHeadlinesInCategory(category.urlPath)
+            }
+        return networkArticles.parseNetworkArticles()
     }
 
     override suspend fun saveToDatabase(article: Article): Boolean =
@@ -58,6 +53,11 @@ class ArticlesRepository @Inject constructor(
     override fun getSavedArticles(): Flow<List<Article>> =
         newsDatabase.articleDao().getAll()
             .map { list -> list.map(ArticleEntity::toArticle) }
+
+    private fun List<NetworkArticle>.parseNetworkArticles(): List<Article> =
+        this.filterNot(NetworkArticle::isEmpty)
+            .distinctBy { it.title }
+            .map(NetworkArticle::toArticle)
 
     private suspend fun tryAccessDatabase(
         action: suspend () -> Unit,
