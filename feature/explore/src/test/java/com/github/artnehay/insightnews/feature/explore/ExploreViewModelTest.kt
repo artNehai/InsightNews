@@ -43,7 +43,7 @@ class ExploreViewModelTest {
                         FakeArticle1.url to "Mar 12, 2023 | 0 min read",
                         FakeArticle2.url to "Jun 1, 1905 | 0 min read",
                     )
-            resultUiState.category shouldBe All
+            resultUiState.category.value shouldBe All
             resultUiState.categorisedHeadlines.value shouldBe listOf(FakeArticle2)
         }
     }

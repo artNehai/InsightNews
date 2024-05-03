@@ -39,6 +39,7 @@ class ExploreViewModel @Inject constructor(
         private set
 
     private lateinit var savedArticles: StateFlow<List<Article>>
+    private val chosenCategory = mutableStateOf(All)
     private val categoryToHeadlinesMap = mutableMapOf<Category, MutableState<List<Article>>>()
 
     @Stable
@@ -48,7 +49,7 @@ class ExploreViewModel @Inject constructor(
         viewModelScope.launch {
             savedArticles = articlesRepository.getSavedArticles().stateIn(viewModelScope)
             fetchTopHeadlines()
-            fetchHeadlinesInCategory(All)
+            fetchHeadlinesInCategory(chosenCategory.value)
         }
     }
 
@@ -67,6 +68,7 @@ class ExploreViewModel @Inject constructor(
                 exploreUiState = Success(
                     topHeadlines = newHeadlines,
                     urlToTimeCaption = urlToTimeCaptionMap,
+                    category = chosenCategory,
                     categorisedHeadlines = categoryToHeadlinesMap.getOrPut(All) {
                         mutableStateOf(listOf())
                     }

@@ -30,12 +30,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -149,9 +151,17 @@ fun ResultScreen(
                         dimensionResource(medium_content_spacer)
                     )
                 ) {
-                    items(Category.entries) {
+                    val chosenCategory by screenUiState.category
+                    items(Category.entries) { category ->
+                        val isChosen = category == chosenCategory
                         Text(
-                            text = "$it",
+                            text = "$category",
+                            color = if (isChosen) {
+                                MaterialTheme.colorScheme.primary
+                            } else {
+                                Color.Unspecified
+                            },
+                            textDecoration = if (isChosen) TextDecoration.Underline else null,
                             style = MaterialTheme.typography.headlineSmall,
                         )
                     }
