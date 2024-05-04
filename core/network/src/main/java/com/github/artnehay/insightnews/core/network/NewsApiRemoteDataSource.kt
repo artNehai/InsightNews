@@ -18,10 +18,10 @@ private const val ApiKey = "8bbfa19122374be490b93afe33f83d73"
 private const val BaseUrl = "https://newsapi.org"
 
 private interface NewsApiService {
-    @GET("v2/top-headlines?country=us&apiKey=$apiKey")
+    @GET("v2/top-headlines?country=us&apiKey=$ApiKey")
     suspend fun getTopHeadlines(): Response<NetworkArticleResponse>
 
-    @GET("v2/top-headlines?country=us&apiKey=$apiKey")
+    @GET("v2/top-headlines?country=us&apiKey=$ApiKey")
     suspend fun getHeadlinesInCategory(
         @Query("category") categoryUrlPath: String,
     ): Response<NetworkArticleResponse>
