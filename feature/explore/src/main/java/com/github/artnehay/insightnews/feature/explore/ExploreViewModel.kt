@@ -40,7 +40,8 @@ class ExploreViewModel @Inject constructor(
 
     private lateinit var savedArticles: StateFlow<List<Article>>
     private val chosenCategory = mutableStateOf(All)
-    private val categoryToHeadlinesMap = mutableMapOf<Category, MutableState<List<Article>>>()
+    private val categorisedHeadlinesCache = mutableMapOf<Category, List<Article>>()
+    private val currentCategorisedHeadlines = mutableStateOf(listOf<Article>())
 
     @Stable
     private val urlToTimeCaptionMap = mutableMapOf<String, MutableState<String>>()
@@ -69,9 +70,7 @@ class ExploreViewModel @Inject constructor(
                     topHeadlines = newHeadlines,
                     urlToTimeCaption = urlToTimeCaptionMap,
                     category = chosenCategory,
-                    categorisedHeadlines = categoryToHeadlinesMap.getOrPut(All) {
-                        mutableStateOf(listOf())
-                    }
+                    categorisedHeadlines = currentCategorisedHeadlines
                 )
             }
         }
@@ -91,6 +90,15 @@ class ExploreViewModel @Inject constructor(
         }
     }
 
+    fun selectCategory(category: Category) {
+        if (category in categorisedHeadlinesCache) {
+            currentCategorisedHeadlines.value = categorisedHeadlinesCache[category] ?: listOf()
+        } else {
+            fetchHeadlinesInCategory(category)
+        }
+        chosenCategory.value = category
+    }
+
     override fun onCleared() {
         super.onCleared()
         ArticleToIsInDatabasePropertyMap.clear()
@@ -103,7 +111,9 @@ class ExploreViewModel @Inject constructor(
                 headlines.getUrlToTimeCaptionMap().forEach {
                     urlToTimeCaptionMap.setValue(it.key, it.value)
                 }
-                categoryToHeadlinesMap.setValue(category, headlines)
+                currentCategorisedHeadlines.value = categorisedHeadlinesCache.getOrPut(category) {
+                    headlines
+                }
             }
         }
     }
