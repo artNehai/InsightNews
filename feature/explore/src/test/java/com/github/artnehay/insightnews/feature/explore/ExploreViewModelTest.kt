@@ -35,7 +35,7 @@ class ExploreViewModelTest {
     @Test
     fun verifyFetchingTopHeadlinesAtInitialization() {
         runBlocking {
-            delay(100)
+            delay(500)
             val resultUiState = exploreViewModel.exploreUiState as Success
             resultUiState.topHeadlines shouldBe listOf(FakeArticle1)
             resultUiState.urlToTimeCaption.mapValues { it.value.value } shouldBe

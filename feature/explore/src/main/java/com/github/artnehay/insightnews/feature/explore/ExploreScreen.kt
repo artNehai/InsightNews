@@ -154,13 +154,13 @@ fun ResultScreen(
                     selectedTabIndex = Category.entries.indexOf(chosenCategory),
                     edgePadding = 0.dp,
                 ) {
-                    Category.entries.forEach {
+                    Category.entries.forEach { category ->
                         Tab(
-                            selected = it == chosenCategory,
-                            onClick = { /*TODO*/ },
+                            selected = category == chosenCategory,
+                            onClick = { viewModel.selectCategory(category) },
                             text = {
                                 Text(
-                                    text = it.name,
+                                    text = category.name,
                                     style = MaterialTheme.typography.headlineSmall,
                                 )
                             },
