@@ -14,9 +14,10 @@ The goal of this project is to develop a cutting edge news app by leveraging the
 ## Features
 <ul>
   <li><strong>News Feed</strong>: Receive news articles based on your preferences</li>
-  <li><strong>Save Articles</strong>: Bookmark interesting articles to read later.</li>
+  <li><strong>Saved Articles</strong>: Bookmark interesting articles to read later.</li>
   <li><strong>Dark Mode Support</strong>: Enjoy reading news in low-light conditions with our dark mode feature.</li>
   <li><strong>Smooth Navigation</strong>: Intuitive navigation using Jetpack Navigation for seamless user experience.</li>
+  <li><strong>Adaptive Layout</strong>: Support for different screen sizes with Jetpack Compose Window size classes.</li>
 </ul>
 
 ## Architecture
@@ -74,11 +75,18 @@ from Activities and moved to
      <code>NewsApiRemoteDataSource</code>
    </td>
   </tr>
+   <tr>
+   <td><code>core:testing</code></td>
+   <td>Testing dependencies, repositories and util classes.</td>
+   <td>
+     <code>ArticleCard</code> <code>ErrorScreen</code> <code>NoticeIcon</code>
+   </td>
+  </tr>
   <tr>
    <td><code>core:ui</code></td>
    <td>Contains reusable UI components and utilities.</td>
    <td>
-     <code>ArticleCard</code> <code>ErrorScreen</code> <code>NoticeIcon</code>
+     <code>TestDispatcherRule</code>
    </td>
   </tr>
   <tr>
@@ -100,11 +108,11 @@ from Activities and moved to
 ## Tech Stack
 | Tech Stack | Implementation Description |
 | --- | --- |
-| [Jetpack Compose](https://developer.android.com/jetpack/compose) | Implement reactive UI using composable functions | 
+| [Jetpack Compose](https://developer.android.com/jetpack/compose) | Implement reactive UI using composable functions |
+| [Compose Window size classes](https://developer.android.com/guide/topics/large-screens/support-different-screen-sizes) | Support different screen sizes |
 | [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) | Act as state holder in UI layer |
+| [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) | Navigate to different screens in the app |
+| [Room Database](https://developer.android.com/training/data-storage/room) | Save the article data locally |
+| [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) | Implement asynchronous flow in the app |
 | [Retrofit](https://square.github.io/retrofit/) | Fetch the latest information from the NewsApi rest server |
 | [Coil](https://github.com/coil-kt/coil) | Load images from URL |
-| [Room Database](https://developer.android.com/training/data-storage/room) | Save the article data locally |
-| [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) | Navigate to different screens in the app |
-| [Scaffold](https://developer.android.com/reference/kotlin/androidx/compose/material/package-summary#scaffold) | Implement top and bottom bars based on material design layout |
-| [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) | Implement asynchronous flow in the app |
