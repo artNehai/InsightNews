@@ -2,7 +2,12 @@ Insight News android app - Your Gateway to Global News
 =====================================
 The goal of this project is to develop a cutting edge news app by leveraging the latest Android development practices and technologies.
 
-<img alt = "Screenshot showing Explore screen" src="docs/images/explore_feature_screenshot.png" width="311" height="700">
+<table>
+  <tr>
+    <td><img alt = "Screenshot showing the Explore screen" src="docs/images/explore_feature_screenshot.png" width="311" height="700"></td>
+    <td><img alt = "Screenshot showing the Saved screen" src="docs/images/saved_feature_screenshot.png" width="311" height="700"></td>
+  </tr>
+</table>
 
 > This app is in work progress and will soon be enhanced with the new features and technologies.
 
