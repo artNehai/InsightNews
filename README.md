@@ -4,8 +4,8 @@ The goal of this project is to develop a cutting edge news app by leveraging the
 
 <table>
   <tr>
-    <td><img alt = "Screenshot showing the Explore screen" src="docs/images/explore_feature_screenshot.png" width="311" height="700"></td>
-    <td><img alt = "Screenshot showing the Saved screen" src="docs/images/saved_feature_screenshot.png" width="311" height="700"></td>
+    <td><img alt = "Screenshot showing the Explore screen" src="docs/images/explore_feature_screenshot.png" width="267" height="600"></td>
+    <td><img alt = "Screenshot showing the Saved screen" src="docs/images/saved_feature_screenshot.png" width="267" height="600"></td>
   </tr>
 </table>
 
