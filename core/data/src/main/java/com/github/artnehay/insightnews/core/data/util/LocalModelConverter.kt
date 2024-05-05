@@ -6,6 +6,7 @@ import com.github.artnehay.insightnews.core.model.SourceHeader
 
 fun Article.toArticleEntity() = ArticleEntity(
     sourceId = source.id,
+    sourceName = source.name,
     author = author,
     title = title,
     description = description,
@@ -17,7 +18,7 @@ fun Article.toArticleEntity() = ArticleEntity(
 )
 
 fun ArticleEntity.toArticle() = Article(
-    source = SourceHeader(id = sourceId, name = ""),
+    source = SourceHeader(id = sourceId, name = sourceName),
     author = author,
     title = title,
     description = description,

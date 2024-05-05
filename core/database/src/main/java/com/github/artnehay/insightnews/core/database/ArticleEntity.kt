@@ -8,6 +8,8 @@ import androidx.room.PrimaryKey
 data class ArticleEntity(
     @ColumnInfo(name = "source_id")
     val sourceId: String,
+    @ColumnInfo(name = "source_name")
+    val sourceName: String,
     val author: String,
     val title: String,
     val description: String,
