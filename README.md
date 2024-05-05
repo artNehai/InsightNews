@@ -91,14 +91,14 @@ from Activities and moved to
   </tr>
   <tr>
    <td><code>feature:explore</code></td>
-   <td>Displays ExploreScreen</td>
+   <td>Displays the Explore screen</td>
    <td>
      <code>ExploreScreen</code> <code>ExploreViewModel</code>
    </td>
   </tr>
   <tr>
    <td><code>feature:saved</code></td>
-   <td>Displays SavedScreen</td>
+   <td>Displays the Saved screen</td>
    <td>
      <code>SavedScreen</code> <code>SavedViewModel</code>
    </td>
