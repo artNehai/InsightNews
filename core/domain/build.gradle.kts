@@ -5,13 +5,15 @@ plugins {
 
 android {
     namespace = "com.github.artnehay.insightnews.core.domain"
-    compileSdk = 34
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+    compileSdk = libs.versions.compileSdk.get().toInt()
+    defaultConfig {
+        minSdk = libs.versions.minSdk.get().toInt()
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
+}
+
+java {
+    toolchain {
+        val version = libs.versions.java.get().toInt()
+        languageVersion.set(JavaLanguageVersion.of(version))
     }
 }

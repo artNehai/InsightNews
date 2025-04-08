@@ -1,10 +1,18 @@
 [versions]
 # Plugins
-agp = "8.4.1"
+agp = "8.9.1"
 kotlin = "1.9.22"
 hilt = "2.51"
 hilt-navigation = "1.2.0"
 ksp = "1.9.22-1.0.18"
+
+# Gradle
+compileSdk = "35"
+minSdk = "24"
+targetSdk = "35"
+java = "21"
+kotlinCompilerExtension = "1.5.8"
+
 # Libraries
 coreKtx = "1.13.1"
 lifecycleRuntimeKtx = "2.8.1"
@@ -14,11 +22,13 @@ navigation = "2.7.7"
 viewmodel = "2.8.1"
 coil = "2.6.0"
 room = "2.6.1"
+
 # Network
 retrofit = "2.9.0"
 serialization = "1.6.3"
 serializationConverter = "1.0.0"
 okhttp = "4.12.0"
+
 # Testing
 junit = "4.13.2"
 junitExtVersion = "1.1.5"

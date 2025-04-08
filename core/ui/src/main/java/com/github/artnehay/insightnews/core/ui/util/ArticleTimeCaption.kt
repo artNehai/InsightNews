@@ -1,7 +1,7 @@
 package com.github.artnehay.insightnews.core.ui.util
 
 import android.text.format.DateUtils
-import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.domain.model.Article
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat

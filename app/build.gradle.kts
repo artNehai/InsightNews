@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.github.artnehay.insightnews"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.github.artnehay.insightnews"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -23,31 +23,31 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            isShrinkResources = false
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+
     buildFeatures {
         compose = true
     }
+
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.8"
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtension.get()
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+}
+
+java {
+    toolchain {
+        val version = libs.versions.java.get().toInt()
+        languageVersion.set(JavaLanguageVersion.of(version))
     }
 }
 
@@ -56,6 +56,7 @@ dependencies {
     implementation(project(":feature:explore"))
     implementation(project(":feature:saved"))
     implementation(project(":core:data"))
+    implementation(project(":core:domain"))
     implementation(project(":core:testing"))
     implementation(project(":core:ui"))
 
