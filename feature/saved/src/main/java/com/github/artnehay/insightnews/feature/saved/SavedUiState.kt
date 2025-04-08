@@ -2,7 +2,7 @@ package com.github.artnehay.insightnews.feature.saved
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.domain.model.Article
 
 sealed interface SavedUiState {
     data object Loading : SavedUiState

@@ -7,7 +7,7 @@ import com.github.artnehay.insightnews.core.data.util.toArticle
 import com.github.artnehay.insightnews.core.data.util.toArticleEntity
 import com.github.artnehay.insightnews.core.database.ArticleEntity
 import com.github.artnehay.insightnews.core.database.NewsDatabase
-import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.domain.model.Article
 import com.github.artnehay.insightnews.core.network.NewsRemoteDataSource
 import com.github.artnehay.insightnews.core.network.model.Category
 import com.github.artnehay.insightnews.core.network.model.Category.All

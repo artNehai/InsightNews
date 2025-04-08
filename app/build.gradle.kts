@@ -56,7 +56,6 @@ dependencies {
     implementation(project(":feature:explore"))
     implementation(project(":feature:saved"))
     implementation(project(":core:data"))
-    implementation(project(":core:model"))
     implementation(project(":core:testing"))
     implementation(project(":core:ui"))
 

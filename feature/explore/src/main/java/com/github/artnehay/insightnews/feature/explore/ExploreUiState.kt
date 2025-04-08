@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
-import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.domain.model.Article
 import com.github.artnehay.insightnews.core.network.model.Category
 
 sealed interface ExploreUiState {

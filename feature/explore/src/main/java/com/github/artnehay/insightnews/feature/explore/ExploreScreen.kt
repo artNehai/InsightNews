@@ -45,7 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.domain.model.Article
 import com.github.artnehay.insightnews.core.network.model.Category
 import com.github.artnehay.insightnews.core.testing.fake.FakeArticle1
 import com.github.artnehay.insightnews.core.ui.ArticleCard

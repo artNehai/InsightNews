@@ -1,7 +1,7 @@
 package com.github.artnehay.insightnews.core.testing.fake
 
-import com.github.artnehay.insightnews.core.model.Article
-import com.github.artnehay.insightnews.core.model.SourceHeader
+import com.github.artnehay.insightnews.core.domain.model.Article
+import com.github.artnehay.insightnews.core.domain.model.SourceHeader
 
 val FakeArticle1 = Article(
     source = SourceHeader(

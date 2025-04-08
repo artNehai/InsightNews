@@ -1,6 +1,6 @@
 package com.github.artnehay.insightnews.core.data
 
-import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.domain.model.Article
 import com.github.artnehay.insightnews.core.network.model.Category
 import kotlinx.coroutines.flow.Flow
 

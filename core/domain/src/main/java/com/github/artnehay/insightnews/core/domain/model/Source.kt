@@ -1,4 +1,4 @@
-package com.github.artnehay.insightnews.core.model
+package com.github.artnehay.insightnews.core.domain.model
 
 data class Source(
     val id: String,

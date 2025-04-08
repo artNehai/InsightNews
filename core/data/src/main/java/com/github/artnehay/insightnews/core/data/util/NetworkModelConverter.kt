@@ -1,8 +1,8 @@
 package com.github.artnehay.insightnews.core.data.util
 
-import com.github.artnehay.insightnews.core.model.Article
-import com.github.artnehay.insightnews.core.model.Source
-import com.github.artnehay.insightnews.core.model.SourceHeader
+import com.github.artnehay.insightnews.core.domain.model.Article
+import com.github.artnehay.insightnews.core.domain.model.Source
+import com.github.artnehay.insightnews.core.domain.model.SourceHeader
 import com.github.artnehay.insightnews.core.network.model.NetworkArticle
 import com.github.artnehay.insightnews.core.network.model.NetworkSource
 import com.github.artnehay.insightnews.core.network.model.NetworkSourceHeader

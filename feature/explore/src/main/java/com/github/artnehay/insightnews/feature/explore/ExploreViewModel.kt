@@ -10,7 +10,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.artnehay.insightnews.core.data.IArticlesRepository
-import com.github.artnehay.insightnews.core.model.Article
+import com.github.artnehay.insightnews.core.domain.model.Article
 import com.github.artnehay.insightnews.core.network.model.Category
 import com.github.artnehay.insightnews.core.network.model.Category.All
 import com.github.artnehay.insightnews.core.network.util.NewsApiException
