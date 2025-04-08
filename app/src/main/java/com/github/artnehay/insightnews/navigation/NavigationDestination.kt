@@ -1,4 +1,4 @@
-package com.github.artnehay.insightnews.ui.navigation
+package com.github.artnehay.insightnews.navigation
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

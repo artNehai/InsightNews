@@ -1,4 +1,4 @@
-package com.github.artnehay.insightnews.ui.navigation.components
+package com.github.artnehay.insightnews.ui.navcomponents
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.size
@@ -17,8 +17,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.github.artnehay.insightnews.core.ui.R
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
-import com.github.artnehay.insightnews.ui.navigation.NavigationDestination
-import com.github.artnehay.insightnews.ui.navigation.StartDestination
+import com.github.artnehay.insightnews.navigation.AppScreens
+import com.github.artnehay.insightnews.navigation.NavigationDestination
+import com.github.artnehay.insightnews.navigation.StartDestination
 
 @Composable
 fun InsightNavigationRail(
@@ -34,7 +35,7 @@ fun InsightNavigationRail(
             right = dimensionResource(com.github.artnehay.insightnews.R.dimen.horizontal_drawer_margin),
         ),
     ) {
-        for (navItem in NavigationItems) {
+        for (navItem in AppScreens) {
             NavigationRailItem(
                 selected = currentDestination == navItem,
                 onClick = { onItemClick(navItem) },

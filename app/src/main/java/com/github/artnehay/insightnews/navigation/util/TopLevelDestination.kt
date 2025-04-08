@@ -1,8 +1,8 @@
-package com.github.artnehay.insightnews.ui.navigation.util
+package com.github.artnehay.insightnews.navigation.util
 
 import androidx.navigation.NavBackStackEntry
-import com.github.artnehay.insightnews.ui.navigation.NavigationDestination
-import com.github.artnehay.insightnews.ui.navigation.StartDestination
+import com.github.artnehay.insightnews.navigation.NavigationDestination
+import com.github.artnehay.insightnews.navigation.StartDestination
 
 fun NavBackStackEntry?.topLevelDestination(): NavigationDestination {
     val route = this?.destination?.route

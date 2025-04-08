@@ -1,8 +1,8 @@
-package com.github.artnehay.insightnews.ui.navigation.util
+package com.github.artnehay.insightnews.navigation.util
 
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import com.github.artnehay.insightnews.ui.navigation.NavigationDestination
+import com.github.artnehay.insightnews.navigation.NavigationDestination
 
 fun NavHostController.navigateSingleTop(
     newDestination: NavigationDestination,

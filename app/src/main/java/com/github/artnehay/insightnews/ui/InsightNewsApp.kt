@@ -19,13 +19,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.github.artnehay.insightnews.R
-import com.github.artnehay.insightnews.ui.navigation.InsightNavHost
-import com.github.artnehay.insightnews.ui.navigation.NavigationDestination
-import com.github.artnehay.insightnews.ui.navigation.components.BottomNavBar
-import com.github.artnehay.insightnews.ui.navigation.components.InsightNavDrawer
-import com.github.artnehay.insightnews.ui.navigation.components.InsightNavigationRail
-import com.github.artnehay.insightnews.ui.navigation.util.navigateSingleTop
-import com.github.artnehay.insightnews.ui.navigation.util.topLevelDestination
+import com.github.artnehay.insightnews.navigation.InsightNavHost
+import com.github.artnehay.insightnews.navigation.NavigationDestination
+import com.github.artnehay.insightnews.ui.navcomponents.BottomNavBar
+import com.github.artnehay.insightnews.ui.navcomponents.InsightNavDrawer
+import com.github.artnehay.insightnews.ui.navcomponents.InsightNavigationRail
+import com.github.artnehay.insightnews.navigation.util.navigateSingleTop
+import com.github.artnehay.insightnews.navigation.util.topLevelDestination
 
 @Composable
 fun InsightNewsApp(

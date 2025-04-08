@@ -1,4 +1,4 @@
-package com.github.artnehay.insightnews.ui.navigation.components
+package com.github.artnehay.insightnews.ui.navcomponents
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.size
@@ -22,8 +22,9 @@ import com.github.artnehay.insightnews.core.testing.fake.FakeArticle1
 import com.github.artnehay.insightnews.core.ui.R
 import com.github.artnehay.insightnews.core.ui.theme.InsightNewsTheme
 import com.github.artnehay.insightnews.feature.explore.HeadlineCard
-import com.github.artnehay.insightnews.ui.navigation.NavigationDestination
-import com.github.artnehay.insightnews.ui.navigation.StartDestination
+import com.github.artnehay.insightnews.navigation.AppScreens
+import com.github.artnehay.insightnews.navigation.NavigationDestination
+import com.github.artnehay.insightnews.navigation.StartDestination
 
 @Composable
 fun InsightNavDrawer(
@@ -42,7 +43,7 @@ fun InsightNavDrawer(
                     right = dimensionResource(com.github.artnehay.insightnews.R.dimen.horizontal_drawer_margin),
                 ),
             ) {
-                for (navItem in NavigationItems) {
+                for (navItem in AppScreens) {
                     NavigationDrawerItem(
                         selected = currentDestination == navItem,
                         onClick = { onItemClick(navItem) },

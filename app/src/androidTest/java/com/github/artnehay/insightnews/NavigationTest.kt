@@ -8,8 +8,8 @@ import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import com.github.artnehay.insightnews.ui.InsightNewsApp
-import com.github.artnehay.insightnews.ui.navigation.NavigationDestination.SavedNavigationDestination
-import com.github.artnehay.insightnews.ui.navigation.StartDestination
+import com.github.artnehay.insightnews.navigation.NavigationDestination.SavedNavigationDestination
+import com.github.artnehay.insightnews.navigation.StartDestination
 import io.kotest.matchers.shouldBe
 import org.junit.Before
 import org.junit.Rule
