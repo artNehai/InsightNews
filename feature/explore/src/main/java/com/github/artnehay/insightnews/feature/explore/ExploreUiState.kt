@@ -5,7 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
 import com.github.artnehay.insightnews.core.domain.model.Article
-import com.github.artnehay.insightnews.core.network.model.Category
+import com.github.artnehay.insightnews.core.domain.model.Category
 
 sealed interface ExploreUiState {
     data object Loading : ExploreUiState

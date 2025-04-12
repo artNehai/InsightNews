@@ -3,8 +3,8 @@ package com.github.artnehay.insightnews.core.network.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NetworkArticleResponse(
+data class ArticleResponseDto(
     val status: String,
     val totalResults: Int,
-    val articles: List<NetworkArticle>,
+    val articles: List<ArticleDto>,
 )

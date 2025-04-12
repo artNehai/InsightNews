@@ -1,6 +1,6 @@
 package com.github.artnehay.insightnews.core.network.model
 
-enum class Category(val urlPath: String) {
+enum class CategoryDto(val urlPath: String) {
     All(""),
     Business("business"),
     Entertainment("entertainment"),

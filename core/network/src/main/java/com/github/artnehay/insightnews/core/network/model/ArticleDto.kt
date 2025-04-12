@@ -4,9 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NetworkArticle(
+data class ArticleDto(
     @SerialName("source")
-    val networkSourceHeader: NetworkSourceHeader,
+    val sourceHeaderDto: SourceHeaderDto,
     val author: String? = "",
     val title: String? = "",
     val description: String? = "",

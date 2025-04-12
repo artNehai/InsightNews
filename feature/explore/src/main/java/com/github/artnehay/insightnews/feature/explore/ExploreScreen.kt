@@ -46,7 +46,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.github.artnehay.insightnews.core.domain.model.Article
-import com.github.artnehay.insightnews.core.network.model.Category
+import com.github.artnehay.insightnews.core.domain.model.Category
 import com.github.artnehay.insightnews.core.testing.fake.FakeArticle1
 import com.github.artnehay.insightnews.core.ui.ArticleCard
 import com.github.artnehay.insightnews.core.ui.ErrorScreen
@@ -160,7 +160,7 @@ fun ResultScreen(
                             onClick = { viewModel.selectCategory(category) },
                             text = {
                                 Text(
-                                    text = category.name,
+                                    text = category.label,
                                     style = MaterialTheme.typography.headlineSmall,
                                 )
                             },

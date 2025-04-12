@@ -17,3 +17,7 @@ java {
         languageVersion.set(JavaLanguageVersion.of(version))
     }
 }
+
+dependencies {
+    implementation(libs.androidx.core.ktx)
+}

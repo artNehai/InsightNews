@@ -1,8 +1,5 @@
 package com.github.artnehay.insightnews.core.domain.model
 
-//import androidx.compose.runtime.Immutable
-
-//@Immutable
 data class Article(
     val source: SourceHeader,
     val author: String,

@@ -11,6 +11,8 @@ import com.github.artnehay.insightnews.core.testing.fake.LocalPublishedAt1
 import com.github.artnehay.insightnews.core.testing.fake.LocalPublishedAt2
 import com.github.artnehay.insightnews.core.testing.fake.SourceId1
 import com.github.artnehay.insightnews.core.testing.fake.SourceId2
+import com.github.artnehay.insightnews.core.testing.fake.SourceName1
+import com.github.artnehay.insightnews.core.testing.fake.SourceName2
 import com.github.artnehay.insightnews.core.testing.fake.TimeToReadMin1
 import com.github.artnehay.insightnews.core.testing.fake.TimeToReadMin2
 import com.github.artnehay.insightnews.core.testing.fake.Title1
@@ -22,6 +24,7 @@ import com.github.artnehay.insightnews.core.testing.fake.UrlToImage2
 
 val FakeArticleEntity1 = ArticleEntity(
     sourceId = SourceId1,
+    sourceName = SourceName1,
     author = Author1,
     title = Title1,
     description = Description1,
@@ -34,6 +37,7 @@ val FakeArticleEntity1 = ArticleEntity(
 
 val FakeArticleEntity2 = ArticleEntity(
     sourceId = SourceId2,
+    sourceName = SourceName2,
     author = Author2,
     title = Title2,
     description = Description2,

@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.artnehay.insightnews.core.domain.repository.ArticleRepository
 import com.github.artnehay.insightnews.core.domain.model.Article
-import com.github.artnehay.insightnews.core.network.model.Category
-import com.github.artnehay.insightnews.core.network.model.Category.All
+import com.github.artnehay.insightnews.core.domain.model.Category
+import com.github.artnehay.insightnews.core.domain.model.Category.All
 import com.github.artnehay.insightnews.core.network.util.NewsApiException
 import com.github.artnehay.insightnews.core.ui.R.drawable.cloud_off_icon
 import com.github.artnehay.insightnews.core.ui.R.drawable.wifi_off_icon

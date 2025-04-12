@@ -1,7 +1,8 @@
 package com.github.artnehay.insightnews.core.domain.repository
 
 import com.github.artnehay.insightnews.core.domain.model.Article
-import java.util.concurrent.Flow
+import com.github.artnehay.insightnews.core.domain.model.Category
+import kotlinx.coroutines.flow.Flow
 
 interface ArticleRepository {
     suspend fun getTopHeadlines(): List<Article>

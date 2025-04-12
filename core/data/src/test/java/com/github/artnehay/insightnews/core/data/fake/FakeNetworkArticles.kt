@@ -1,7 +1,7 @@
 package com.github.artnehay.insightnews.core.data.fake
 
-import com.github.artnehay.insightnews.core.network.model.NetworkArticle
-import com.github.artnehay.insightnews.core.network.model.NetworkSourceHeader
+import com.github.artnehay.insightnews.core.network.model.ArticleDto
+import com.github.artnehay.insightnews.core.network.model.SourceHeaderDto
 import com.github.artnehay.insightnews.core.testing.fake.Author1
 import com.github.artnehay.insightnews.core.testing.fake.Author2
 import com.github.artnehay.insightnews.core.testing.fake.Content1
@@ -21,8 +21,8 @@ import com.github.artnehay.insightnews.core.testing.fake.Url2
 import com.github.artnehay.insightnews.core.testing.fake.UrlToImage1
 import com.github.artnehay.insightnews.core.testing.fake.UrlToImage2
 
-val FakeNetworkArticle1 = NetworkArticle(
-    networkSourceHeader = NetworkSourceHeader(
+val FakeArticleDto1 = ArticleDto(
+    sourceHeaderDto = SourceHeaderDto(
         id = SourceId1,
         name = SourceName1,
     ),
@@ -35,8 +35,8 @@ val FakeNetworkArticle1 = NetworkArticle(
     content = Content1,
 )
 
-val FakeNetworkArticle2 = NetworkArticle(
-    networkSourceHeader = NetworkSourceHeader(
+val FakeArticleDto2 = ArticleDto(
+    sourceHeaderDto = SourceHeaderDto(
         id = SourceId2,
         name = SourceName2,
     ),

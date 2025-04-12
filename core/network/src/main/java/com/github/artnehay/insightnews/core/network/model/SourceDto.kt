@@ -3,7 +3,7 @@ package com.github.artnehay.insightnews.core.network.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NetworkSource(
+data class SourceDto(
     val id: String? = "",
     val name: String? = "",
     val description: String? = "",
