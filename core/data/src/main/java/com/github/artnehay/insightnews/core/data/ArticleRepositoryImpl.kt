@@ -1,14 +1,14 @@
 package com.github.artnehay.insightnews.core.data
 
 import android.util.Log
-import com.github.artnehay.insightnews.core.data.di.NewsApiDataSource
 import com.github.artnehay.insightnews.core.data.util.isEmpty
 import com.github.artnehay.insightnews.core.data.util.toArticle
 import com.github.artnehay.insightnews.core.data.util.toArticleEntity
 import com.github.artnehay.insightnews.core.database.ArticleEntity
 import com.github.artnehay.insightnews.core.database.NewsDatabase
 import com.github.artnehay.insightnews.core.domain.model.Article
-import com.github.artnehay.insightnews.core.network.NewsRemoteDataSource
+import com.github.artnehay.insightnews.core.domain.repository.ArticleRepository
+import com.github.artnehay.insightnews.core.network.ArticleRemoteDataSource
 import com.github.artnehay.insightnews.core.network.model.Category
 import com.github.artnehay.insightnews.core.network.model.Category.All
 import com.github.artnehay.insightnews.core.network.model.NetworkArticle
@@ -19,23 +19,22 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ArticlesRepository @Inject constructor(
-    @NewsApiDataSource
-    private val newsApiRemoteDataSource: NewsRemoteDataSource,
+class ArticleRepositoryImpl @Inject constructor(
+    private val articleRemoteDataSource: ArticleRemoteDataSource,
     private val newsDatabase: NewsDatabase,
-) : IArticlesRepository {
+) : ArticleRepository {
 
     override suspend fun getTopHeadlines(): List<Article> =
-        newsApiRemoteDataSource
+        articleRemoteDataSource
             .getTopHeadlines()
             .parseNetworkArticles()
 
     override suspend fun getHeadlinesInCategory(category: Category): List<Article> {
         val networkArticles =
             if (category == All) {
-                newsApiRemoteDataSource.getAllArticles()
+                articleRemoteDataSource.getAllArticles()
             } else {
-                newsApiRemoteDataSource.getHeadlinesInCategory(category.urlPath)
+                articleRemoteDataSource.getHeadlinesInCategory(category.urlPath)
             }
         return networkArticles.parseNetworkArticles()
     }

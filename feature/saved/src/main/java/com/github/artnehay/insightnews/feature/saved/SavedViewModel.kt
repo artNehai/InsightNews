@@ -3,7 +3,7 @@ package com.github.artnehay.insightnews.feature.saved
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.artnehay.insightnews.core.data.IArticlesRepository
+import com.github.artnehay.insightnews.core.domain.repository.ArticleRepository
 import com.github.artnehay.insightnews.core.ui.R
 import com.github.artnehay.insightnews.core.ui.util.getUrlToTimeCaptionMap
 import com.github.artnehay.insightnews.feature.saved.SavedUiState.Error
@@ -20,12 +20,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SavedViewModel @Inject constructor(
-    articlesRepository: IArticlesRepository,
+    articleRepository: ArticleRepository,
 ) : ViewModel() {
 
     val savedUiState: StateFlow<SavedUiState> =
         try {
-            articlesRepository.getSavedArticles().map { articles ->
+            articleRepository.getSavedArticles().map { articles ->
                 Success(
                     savedArticles = articles,
                     urlToTimeCaption = articles.getUrlToTimeCaptionMap(),

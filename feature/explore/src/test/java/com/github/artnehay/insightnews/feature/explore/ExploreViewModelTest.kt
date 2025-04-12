@@ -1,6 +1,6 @@
 package com.github.artnehay.insightnews.feature.explore
 
-import com.github.artnehay.insightnews.core.data.fake.FakeArticlesRepository
+import com.github.artnehay.insightnews.core.data.fake.FakeArticleRepository
 import com.github.artnehay.insightnews.core.network.model.Category.All
 import com.github.artnehay.insightnews.core.testing.fake.FakeArticle1
 import com.github.artnehay.insightnews.core.testing.fake.FakeArticle2
@@ -22,7 +22,7 @@ class ExploreViewModelTest {
 
     @Before
     fun initExploreViewModel() {
-        exploreViewModel = ExploreViewModel(FakeArticlesRepository)
+        exploreViewModel = ExploreViewModel(FakeArticleRepository)
     }
 
     @Test

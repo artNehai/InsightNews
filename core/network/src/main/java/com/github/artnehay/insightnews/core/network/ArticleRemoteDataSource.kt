@@ -2,7 +2,7 @@ package com.github.artnehay.insightnews.core.network
 
 import com.github.artnehay.insightnews.core.network.model.NetworkArticle
 
-interface NewsRemoteDataSource {
+interface ArticleRemoteDataSource {
     suspend fun getTopHeadlines(): List<NetworkArticle>
     suspend fun getHeadlinesInCategory(categoryUrlPath: String): List<NetworkArticle>
     suspend fun getAllArticles(): List<NetworkArticle>

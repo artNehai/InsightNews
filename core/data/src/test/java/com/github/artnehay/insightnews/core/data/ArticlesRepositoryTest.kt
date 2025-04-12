@@ -2,8 +2,9 @@ package com.github.artnehay.insightnews.core.data
 
 import android.content.Context
 import androidx.room.Room
-import com.github.artnehay.insightnews.core.data.fake.FakeNewsRemoteDataSource
+import com.github.artnehay.insightnews.core.data.fake.FakeArticleRemoteDataSource
 import com.github.artnehay.insightnews.core.database.NewsDatabase
+import com.github.artnehay.insightnews.core.domain.repository.ArticleRepository
 import com.github.artnehay.insightnews.core.testing.fake.FakeArticle1
 import com.github.artnehay.insightnews.core.testing.fake.FakeArticle2
 import io.kotest.matchers.shouldBe
@@ -21,7 +22,7 @@ import java.io.IOException
 class ArticlesRepositoryTest {
 
     private lateinit var newsDatabase: NewsDatabase
-    private lateinit var articlesRepository: ArticlesRepository
+    private lateinit var articleRepository: ArticleRepository
 
     @Before
     fun createArticlesRepository() {
@@ -30,8 +31,8 @@ class ArticlesRepositoryTest {
             // Allowing main thread queries, just for testing.
             .allowMainThreadQueries()
             .build()
-        articlesRepository = ArticlesRepository(
-            newsApiRemoteDataSource = FakeNewsRemoteDataSource,
+        articleRepository = ArticleRepositoryImpl(
+            articleRemoteDataSource = FakeArticleRemoteDataSource,
             newsDatabase = newsDatabase,
         )
     }
@@ -44,14 +45,14 @@ class ArticlesRepositoryTest {
 
     @Test
     fun getTopHeadlines() = runTest {
-        articlesRepository.getTopHeadlines() shouldBe listOf(FakeArticle1, FakeArticle2)
+        articleRepository.getTopHeadlines() shouldBe listOf(FakeArticle1, FakeArticle2)
     }
 
     @Test
     @Throws(IOException::class)
     fun getSavedArticles() = runTest {
-        articlesRepository.saveToDatabase(FakeArticle1)
-        articlesRepository.saveToDatabase(FakeArticle2)
-        articlesRepository.getSavedArticles().first() shouldBe listOf(FakeArticle1, FakeArticle2)
+        articleRepository.saveToDatabase(FakeArticle1)
+        articleRepository.saveToDatabase(FakeArticle2)
+        articleRepository.getSavedArticles().first() shouldBe listOf(FakeArticle1, FakeArticle2)
     }
 }

@@ -1,13 +1,13 @@
 package com.github.artnehay.insightnews.core.data.fake
 
-import com.github.artnehay.insightnews.core.data.IArticlesRepository
+import com.github.artnehay.insightnews.core.domain.repository.ArticleRepository
 import com.github.artnehay.insightnews.core.domain.model.Article
 import com.github.artnehay.insightnews.core.network.model.Category
 import com.github.artnehay.insightnews.core.testing.fake.FakeArticle1
 import com.github.artnehay.insightnews.core.testing.fake.FakeArticle2
 import kotlinx.coroutines.flow.flow
 
-object FakeArticlesRepository : IArticlesRepository {
+object FakeArticleRepository : ArticleRepository {
 
     override suspend fun getTopHeadlines() = listOf(FakeArticle1)
 

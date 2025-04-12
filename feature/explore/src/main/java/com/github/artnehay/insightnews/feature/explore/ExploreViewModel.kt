@@ -9,7 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.artnehay.insightnews.core.data.IArticlesRepository
+import com.github.artnehay.insightnews.core.domain.repository.ArticleRepository
 import com.github.artnehay.insightnews.core.domain.model.Article
 import com.github.artnehay.insightnews.core.network.model.Category
 import com.github.artnehay.insightnews.core.network.model.Category.All
@@ -32,7 +32,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExploreViewModel @Inject constructor(
-    private val articlesRepository: IArticlesRepository,
+    private val articleRepository: ArticleRepository,
 ) : ViewModel() {
 
     var exploreUiState by mutableStateOf<ExploreUiState>(Loading)
@@ -48,7 +48,7 @@ class ExploreViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            savedArticles = articlesRepository.getSavedArticles().stateIn(viewModelScope)
+            savedArticles = articleRepository.getSavedArticles().stateIn(viewModelScope)
             fetchTopHeadlines()
             fetchHeadlinesInCategory(chosenCategory.value)
         }
@@ -58,7 +58,7 @@ class ExploreViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             tryFetchingFromRemote {
                 val newHeadlines: List<Article> =
-                    articlesRepository.getTopHeadlines().onEach { headline ->
+                    articleRepository.getTopHeadlines().onEach { headline ->
                         if (headline.isSavedToDb()) {
                             ArticleToIsInDatabasePropertyMap.setValue(headline, true)
                         }
@@ -78,14 +78,14 @@ class ExploreViewModel @Inject constructor(
 
     fun saveToDatabase(article: Article) {
         viewModelScope.launch {
-            val isSaved = articlesRepository.saveToDatabase(article)
+            val isSaved = articleRepository.saveToDatabase(article)
             ArticleToIsInDatabasePropertyMap.setValue(article, isSaved)
         }
     }
 
     fun removeFromDatabase(article: Article) {
         viewModelScope.launch {
-            val isRemoved = articlesRepository.removeFromDatabase(article)
+            val isRemoved = articleRepository.removeFromDatabase(article)
             ArticleToIsInDatabasePropertyMap.setValue(article, !isRemoved)
         }
     }
@@ -107,7 +107,7 @@ class ExploreViewModel @Inject constructor(
     private fun fetchHeadlinesInCategory(category: Category) {
         viewModelScope.launch(Dispatchers.IO) {
             tryFetchingFromRemote {
-                val headlines = articlesRepository.getHeadlinesInCategory(category)
+                val headlines = articleRepository.getHeadlinesInCategory(category)
                 headlines.getUrlToTimeCaptionMap().forEach {
                     urlToTimeCaptionMap.setValue(it.key, it.value)
                 }

@@ -30,7 +30,7 @@ private interface NewsApiService {
     suspend fun getAllArticles(): Response<NetworkArticleResponse>
 }
 
-class NewsApiRemoteDataSource @Inject constructor() : NewsRemoteDataSource {
+class ArticleRemoteDataSourceImpl @Inject constructor() : ArticleRemoteDataSource {
 
     private val retrofit: NewsApiService = Retrofit.Builder()
         .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
